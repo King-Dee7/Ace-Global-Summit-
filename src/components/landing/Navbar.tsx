@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Sparkles, ArrowRight, Menu, X, Shield } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 interface NavbarProps {
   onSecureSeatClick?: () => void;
@@ -41,7 +41,7 @@ export default function Navbar({ onSecureSeatClick }: NavbarProps) {
         <div className="flex items-center justify-between">
           {/* Logo / Brand Name */}
           <Link href="/" className="group flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF6417] to-[#E65100] flex items-center justify-center font-bold text-white shadow-lg shadow-[#FF6417]/25 group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF6417] to-[#E65100] flex items-center justify-center font-bold text-white shadow-md group-hover:scale-105 transition-transform">
               <span className="tracking-tighter text-lg font-black">ACE</span>
             </div>
             <div>
@@ -84,33 +84,10 @@ export default function Navbar({ onSecureSeatClick }: NavbarProps) {
             >
               PARTNERS
             </a>
-            <a
-              href="#venue"
-              onClick={(e) => handleNavClick(e, "venue")}
-              className="hover:text-[#FF6417] transition-colors"
-            >
-              VENUE
-            </a>
-            <a
-              href="#faq"
-              onClick={(e) => handleNavClick(e, "faq")}
-              className="hover:text-[#FF6417] transition-colors"
-            >
-              FAQ
-            </a>
           </nav>
 
-          {/* Action Area: Sticky CTA + Admin icon */}
+          {/* Action Area: Sticky CTA */}
           <div className="flex items-center space-x-3">
-            <Link
-              href="/admin/login"
-              title="Staff / Admin Portal"
-              className="hidden lg:flex items-center space-x-1.5 text-xs text-white/60 hover:text-white px-2.5 py-1.5 rounded-lg border border-white/10 hover:border-white/30 transition-colors"
-            >
-              <Shield className="w-3.5 h-3.5 text-[#FF6417]" />
-              <span>Admin</span>
-            </Link>
-
             {/* Sticky "Secure my seat" Button */}
             <a
               href="#tickets"
@@ -122,11 +99,9 @@ export default function Navbar({ onSecureSeatClick }: NavbarProps) {
                   handleNavClick(e, "tickets");
                 }
               }}
-              className="relative inline-flex items-center justify-center px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#FF6417] to-[#E65100] rounded-full shadow-lg shadow-[#FF6417]/30 hover:shadow-[#FF6417]/50 hover:scale-105 active:scale-95 transition-all duration-200 group border border-white/20"
+              className="relative inline-flex items-center justify-center px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#FF6417] to-[#E65100] rounded-full shadow-md hover:opacity-90 active:scale-95 transition-all duration-200 group border border-white/20"
             >
-              <Sparkles className="w-3.5 h-3.5 mr-1.5 text-white animate-pulse" />
               <span>Secure my seat</span>
-              <ArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-1 transition-transform" />
             </a>
 
             {/* Mobile Hamburger Button */}
@@ -173,28 +148,6 @@ export default function Navbar({ onSecureSeatClick }: NavbarProps) {
             >
               PARTNERS
             </a>
-            <a
-              href="#venue"
-              onClick={(e) => handleNavClick(e, "venue")}
-              className="hover:text-[#FF6417] py-1 border-b border-white/10"
-            >
-              VENUE
-            </a>
-            <a
-              href="#faq"
-              onClick={(e) => handleNavClick(e, "faq")}
-              className="hover:text-[#FF6417] py-1 border-b border-white/10"
-            >
-              FAQ
-            </a>
-            <Link
-              href="/admin/login"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-xs text-white/70 hover:text-white flex items-center space-x-2 pt-2"
-            >
-              <Shield className="w-4 h-4 text-[#FF6417]" />
-              <span>Organizer & Staff Portal</span>
-            </Link>
           </div>
         </div>
       )}

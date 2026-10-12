@@ -89,7 +89,7 @@ export default function TheDay() {
       } else {
         setErrorMsg("Failed to subscribe. Please try again.");
       }
-    } catch (err) {
+    } catch {
       setErrorMsg("An error occurred. Please try again.");
     } finally {
       setLoading(false);
@@ -97,21 +97,21 @@ export default function TheDay() {
   };
 
   return (
-    <section id="programme" className="py-24 sm:py-32 bg-[#4A040A] text-white relative">
+    <section id="programme" className="py-24 sm:py-32 bg-white text-gray-900 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-16">
           <GsapReveal direction="up">
-            <span className="text-xs sm:text-sm font-bold tracking-widest text-[#FF6417] uppercase block mb-3">
+            <span className="text-xs sm:text-sm font-bold tracking-widest text-[#E65100] uppercase block mb-3">
               One Immersive Day • Dec 23, 2026
             </span>
           </GsapReveal>
           <GsapReveal direction="up" delay={0.1}>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[#62060E] tracking-tight leading-tight">
               What your day <span className="text-[#FF6417]">looks like.</span>
             </h2>
           </GsapReveal>
           <GsapReveal direction="up" delay={0.2}>
-            <p className="mt-4 text-lg text-white/80 font-light">
+            <p className="mt-4 text-lg text-gray-600 font-normal">
               A meticulously choreographed schedule designed to maximize high-value serendipity, actionable insights, and structured deal flow.
             </p>
           </GsapReveal>
@@ -126,8 +126,8 @@ export default function TheDay() {
                 <div
                   className={`h-full p-8 rounded-3xl border transition-all duration-300 flex flex-col justify-between ${
                     block.isDealroom
-                      ? "bg-gradient-to-br from-[#FF6417]/25 via-[#62060E] to-[#3B0207] border-[#FF6417] shadow-xl shadow-[#FF6417]/20"
-                      : "bg-[#62060E]/80 border-white/10 hover:border-[#FF6417]/40"
+                      ? "bg-gradient-to-br from-[#62060E] to-[#3B0207] text-white border-[#FF6417] shadow-xl shadow-[#62060E]/20"
+                      : "bg-[#FAF7F5] border-gray-200/80 hover:border-[#FF6417] hover:shadow-lg text-gray-900"
                   }`}
                 >
                   <div>
@@ -135,28 +135,42 @@ export default function TheDay() {
                       <div
                         className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                           block.isDealroom
-                            ? "bg-[#FF6417] text-white shadow-lg shadow-[#FF6417]/30"
-                            : "bg-white/10 text-[#FF6417]"
+                            ? "bg-[#FF6417] text-white shadow-sm"
+                            : "bg-white text-[#62060E] border border-gray-200 shadow-sm"
                         }`}
                       >
                         <Icon className="w-6 h-6" />
                       </div>
-                      <div className="flex items-center space-x-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/80">
+                      <div
+                        className={`flex items-center space-x-1.5 text-xs font-semibold px-3 py-1 rounded-full border ${
+                          block.isDealroom
+                            ? "bg-white/10 border-white/20 text-white/90"
+                            : "bg-white border-gray-200 text-gray-600"
+                        }`}
+                      >
                         <Clock className="w-3 h-3 text-[#FF6417]" />
                         <span>{block.time}</span>
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-bold text-white mb-3 leading-snug">
+                    <h3
+                      className={`text-xl font-bold mb-3 leading-snug ${
+                        block.isDealroom ? "text-white" : "text-[#62060E]"
+                      }`}
+                    >
                       {block.title}
                     </h3>
-                    <p className="text-sm text-white/75 leading-relaxed font-light">
+                    <p
+                      className={`text-sm leading-relaxed font-normal ${
+                        block.isDealroom ? "text-white/80" : "text-gray-600"
+                      }`}
+                    >
                       {block.description}
                     </p>
                   </div>
 
                   {block.isDealroom && (
-                    <div className="mt-6 pt-4 border-t border-[#FF6417]/30 text-xs font-bold text-[#FF6417] flex items-center justify-between">
+                    <div className="mt-6 pt-4 border-t border-[#FF6417]/40 text-xs font-bold text-[#FF6417] flex items-center justify-between">
                       <span>Exclusive to VIP Ticket Holders</span>
                       <span className="underline">Limited capacity</span>
                     </div>
@@ -169,13 +183,11 @@ export default function TheDay() {
 
         {/* Full Schedule Notify Form */}
         <GsapReveal direction="up" delay={0.3}>
-          <div className="max-w-3xl mx-auto rounded-3xl p-8 sm:p-12 bg-gradient-to-r from-[#62060E] to-[#3B0207] border border-[#FF6417]/30 shadow-2xl relative overflow-hidden text-center">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6417]/10 blur-[80px] rounded-full pointer-events-none" />
-
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+          <div className="max-w-3xl mx-auto rounded-3xl p-8 sm:p-12 bg-[#62060E] border border-[#FF6417]/30 shadow-2xl relative overflow-hidden text-center text-white">
+            <h3 className="text-2xl sm:text-3xl font-black text-white mb-3">
               Be first to see the full schedule.
             </h3>
-            <p className="text-sm sm:text-base text-white/80 mb-8 max-w-xl mx-auto">
+            <p className="text-sm sm:text-base text-white/80 mb-8 max-w-xl mx-auto font-light">
               Our comprehensive session-by-session timetable and stage breakdowns will be released ahead of the summit.
             </p>
 
@@ -199,7 +211,7 @@ export default function TheDay() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-7 py-3.5 rounded-full bg-[#E65100] hover:bg-[#FF6417] text-white font-bold text-sm shadow-lg shadow-[#E65100]/30 transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
+                  className="px-7 py-3.5 rounded-full bg-[#E65100] hover:bg-[#FF6417] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
                 >
                   {loading ? (
                     <Loader2 className="w-4 h-4 animate-spin" />

@@ -66,16 +66,16 @@ html.lenis body {
 }
 .glass-card-hover:hover {
   border-color: rgba(255, 100, 23, 0.45);
-  box-shadow: 0 12px 35px -10px rgba(230, 81, 0, 0.35);
+  box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.35);
   transform: translateY(-3px);
 }
 
 .glow-orange {
-  box-shadow: 0 0 25px -4px rgba(255, 100, 23, 0.4);
+  box-shadow: none;
 }
 
 .glow-orange-subtle {
-  box-shadow: 0 0 40px -10px rgba(230, 81, 0, 0.25);
+  box-shadow: none;
 }
 
 .text-gradient-orange {

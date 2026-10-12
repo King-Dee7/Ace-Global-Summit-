@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { X, Shield, ArrowRight, Loader2, CheckCircle2, User, Mail, Phone, Building } from "lucide-react";
+import { X, Shield, Loader2, CheckCircle2, User, Mail, Phone, Building } from "lucide-react";
 import { TicketProduct, AttendeeInput, CheckoutPayload } from "@/lib/types";
 
 interface CheckoutModalProps {
@@ -314,7 +314,7 @@ export default function CheckoutModal({ ticket, onClose }: CheckoutModalProps) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 rounded-full bg-gradient-to-r from-[#FF6417] to-[#E65100] hover:from-[#FF7B39] hover:to-[#FF6417] text-white font-black text-base shadow-xl shadow-[#FF6417]/35 transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
+              className="w-full py-4 rounded-full bg-gradient-to-r from-[#FF6417] to-[#E65100] hover:from-[#FF7B39] hover:to-[#FF6417] text-white font-black text-base shadow-md transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
             >
               {loading ? (
                 <>
@@ -322,10 +322,7 @@ export default function CheckoutModal({ ticket, onClose }: CheckoutModalProps) {
                   <span>Connecting to Paystack...</span>
                 </>
               ) : (
-                <>
-                  <span>Pay ${ticket.priceUSD} USD via Paystack</span>
-                  <ArrowRight className="w-5 h-5" />
-                </>
+                <span>Pay ${ticket.priceUSD} USD via Paystack</span>
               )}
             </button>
 

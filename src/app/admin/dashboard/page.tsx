@@ -161,7 +161,7 @@ export default function AdminDashboardPage() {
       <header className="bg-[#62060E] border-b border-[#FF6417]/25 px-4 sm:px-8 py-4 sticky top-0 z-30 shadow-md">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF6417] to-[#E65100] flex items-center justify-center font-bold text-white shadow-lg shadow-[#FF6417]/30">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF6417] to-[#E65100] flex items-center justify-center font-bold text-white shadow-md">
               ACE
             </div>
             <div>
@@ -180,7 +180,7 @@ export default function AdminDashboardPage() {
           <div className="flex items-center space-x-3 text-xs">
             <Link
               href="/admin/scan"
-              className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-[#FF6417] hover:bg-[#FF7B39] text-white font-bold transition-all shadow-md shadow-[#FF6417]/30"
+              className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-[#FF6417] hover:bg-[#FF7B39] text-white font-bold transition-all shadow-md"
             >
               <QrCode className="w-4 h-4" />
               <span>Door QR Scanner</span>
@@ -281,7 +281,7 @@ export default function AdminDashboardPage() {
               onClick={() => setActiveTab("attendees")}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                 activeTab === "attendees"
-                  ? "bg-[#FF6417] text-white shadow-md shadow-[#FF6417]/25"
+                  ? "bg-[#FF6417] text-white shadow-md"
                   : "bg-white/5 text-white/70 hover:text-white"
               }`}
             >
@@ -291,7 +291,7 @@ export default function AdminDashboardPage() {
               onClick={() => setActiveTab("orders")}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                 activeTab === "orders"
-                  ? "bg-[#FF6417] text-white shadow-md shadow-[#FF6417]/25"
+                  ? "bg-[#FF6417] text-white shadow-md"
                   : "bg-white/5 text-white/70 hover:text-white"
               }`}
             >
@@ -301,7 +301,7 @@ export default function AdminDashboardPage() {
               onClick={() => setActiveTab("leads")}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                 activeTab === "leads"
-                  ? "bg-[#FF6417] text-white shadow-md shadow-[#FF6417]/25"
+                  ? "bg-[#FF6417] text-white shadow-md"
                   : "bg-white/5 text-white/70 hover:text-white"
               }`}
             >
@@ -311,7 +311,7 @@ export default function AdminDashboardPage() {
               onClick={() => setActiveTab("checkin")}
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                 activeTab === "checkin"
-                  ? "bg-[#FF6417] text-white shadow-md shadow-[#FF6417]/25"
+                  ? "bg-[#FF6417] text-white shadow-md"
                   : "bg-white/5 text-white/70 hover:text-white"
               }`}
             >
@@ -546,7 +546,7 @@ export default function AdminDashboardPage() {
         {/* TAB 4: QUICK CHECK-IN TOOL */}
         {activeTab === "checkin" && (
           <div className="max-w-xl mx-auto rounded-3xl p-8 bg-[#62060E] border border-[#FF6417]/30 shadow-2xl text-center space-y-6">
-            <div className="w-16 h-16 rounded-2xl bg-[#FF6417]/20 border border-[#FF6417] text-[#FF6417] flex items-center justify-center mx-auto shadow-lg shadow-[#FF6417]/20">
+            <div className="w-16 h-16 rounded-2xl bg-[#FF6417]/20 border border-[#FF6417] text-[#FF6417] flex items-center justify-center mx-auto shadow-md">
               <QrCode className="w-8 h-8" />
             </div>
 
@@ -580,7 +580,7 @@ export default function AdminDashboardPage() {
               <button
                 type="submit"
                 disabled={checkingIn || !checkInCode}
-                className="w-full py-3.5 rounded-full bg-[#FF6417] hover:bg-[#FF7B39] text-white font-bold text-sm shadow-xl shadow-[#FF6417]/30 transition-all disabled:opacity-50"
+                className="w-full py-3.5 rounded-full bg-[#FF6417] hover:bg-[#FF7B39] text-white font-bold text-sm shadow-md transition-all disabled:opacity-50"
               >
                 {checkingIn ? "Validating..." : "Admit Delegate"}
               </button>

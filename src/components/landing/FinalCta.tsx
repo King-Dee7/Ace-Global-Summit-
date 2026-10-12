@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar, MapPin, ArrowRight, Sparkles } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
 import GsapReveal from "../motion/GsapReveal";
 
 interface FinalCtaProps {
@@ -10,13 +10,9 @@ interface FinalCtaProps {
 export default function FinalCta({ onSecureSeatClick }: FinalCtaProps) {
   return (
     <section className="py-24 sm:py-32 bg-gradient-to-b from-[#62060E] to-[#3B0207] text-white relative overflow-hidden text-center">
-      {/* Background glow and circular rings */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#FF6417]/15 blur-[160px] rounded-full pointer-events-none" />
-
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <GsapReveal direction="down">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/10 border border-[#FF6417]/40 text-xs sm:text-sm font-bold text-white uppercase tracking-wider mb-8">
-            <Sparkles className="w-4 h-4 text-[#FF6417]" />
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/10 border border-[#FF6417]/40 text-xs sm:text-sm font-bold text-white uppercase tracking-wider mb-8">
             <span>December 23, 2026 • Accra, Ghana</span>
           </div>
         </GsapReveal>
@@ -47,10 +43,9 @@ export default function FinalCta({ onSecureSeatClick }: FinalCtaProps) {
         <GsapReveal direction="up" delay={0.3}>
           <button
             onClick={onSecureSeatClick}
-            className="px-10 py-5 rounded-full bg-gradient-to-r from-[#FF6417] via-[#E65100] to-[#FF6417] text-white font-black text-lg sm:text-xl shadow-2xl shadow-[#FF6417]/40 hover:scale-105 active:scale-95 transition-all duration-300 border border-white/20 inline-flex items-center space-x-3 group"
+            className="px-10 py-5 rounded-full bg-gradient-to-r from-[#FF6417] via-[#E65100] to-[#FF6417] text-white font-black text-lg sm:text-xl shadow-md hover:scale-105 active:scale-95 transition-all duration-300 border border-white/20 inline-flex items-center justify-center"
           >
             <span>Secure my seat</span>
-            <ArrowRight className="w-6 h-6 group-hover:translate-x-1.5 transition-transform" />
           </button>
         </GsapReveal>
       </div>

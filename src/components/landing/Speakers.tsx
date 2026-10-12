@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { UserCheck, Sparkles, Check, Send, Loader2, Lock } from "lucide-react";
+import { UserCheck, Check, Send, Loader2, Lock } from "lucide-react";
 import GsapReveal from "../motion/GsapReveal";
 
 const TEASER_PROFILES = [
@@ -117,7 +117,6 @@ export default function Speakers() {
         <GsapReveal direction="up" delay={0.3}>
           <div className="max-w-2xl mx-auto rounded-3xl p-8 sm:p-10 bg-gradient-to-br from-[#4A040A] to-[#3B0207] border border-[#FF6417]/30 text-center shadow-xl">
             <div className="inline-flex items-center space-x-2 text-[#FF6417] text-xs font-bold uppercase tracking-wider mb-2">
-              <Sparkles className="w-4 h-4" />
               <span>Priority Access</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
@@ -147,7 +146,7 @@ export default function Speakers() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-7 py-3.5 rounded-full bg-[#E65100] hover:bg-[#FF6417] text-white font-bold text-sm shadow-lg shadow-[#E65100]/30 transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
+                  className="px-7 py-3.5 rounded-full bg-[#E65100] hover:bg-[#FF6417] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
                 >
                   {loading ? (
                     <Loader2 className="w-4 h-4 animate-spin" />

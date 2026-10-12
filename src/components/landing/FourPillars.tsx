@@ -1,6 +1,6 @@
 "use client";
 
-import { Coins, Sparkles, Truck, Cpu, ArrowRight } from "lucide-react";
+import { Coins, Music, Truck, Cpu } from "lucide-react";
 import GsapReveal from "../motion/GsapReveal";
 
 interface FourPillarsProps {
@@ -24,7 +24,7 @@ const PILLARS = [
     description: "The people and stories turning culture into industry.",
     details:
       "From music streaming and fashion exports to film distribution and IP protection—unlocking the commercial infrastructure of Africa's most influential export.",
-    icon: Sparkles,
+    icon: Music,
   },
   {
     num: "03",
@@ -49,9 +49,6 @@ const PILLARS = [
 export default function FourPillars({ onSecureSeatClick }: FourPillarsProps) {
   return (
     <section id="pillars" className="py-24 sm:py-32 bg-[#62060E] text-white relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#FF6417]/10 blur-[150px] rounded-full pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
           <div className="max-w-2xl">
@@ -70,10 +67,9 @@ export default function FourPillars({ onSecureSeatClick }: FourPillarsProps) {
           <GsapReveal direction="left" delay={0.2} className="mt-6 md:mt-0">
             <button
               onClick={onSecureSeatClick}
-              className="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-[#E65100] hover:bg-[#FF6417] text-white font-bold text-sm shadow-xl shadow-[#E65100]/30 hover:scale-105 transition-all"
+              className="inline-flex items-center px-6 py-3 rounded-full bg-[#E65100] hover:bg-[#FF6417] text-white font-bold text-sm shadow-md hover:scale-105 transition-all"
             >
               <span>Secure my seat</span>
-              <ArrowRight className="w-4 h-4" />
             </button>
           </GsapReveal>
         </div>
@@ -83,10 +79,10 @@ export default function FourPillars({ onSecureSeatClick }: FourPillarsProps) {
             const Icon = pillar.icon;
             return (
               <GsapReveal key={pillar.num} direction="up" delay={idx * 0.1}>
-                <div className="relative group p-8 sm:p-10 rounded-3xl bg-white/5 border border-white/10 hover:border-[#FF6417]/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#FF6417]/15 h-full flex flex-col justify-between">
+                <div className="relative group p-8 sm:p-10 rounded-3xl bg-white/5 border border-white/10 hover:border-[#FF6417]/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-8">
-                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF6417] to-[#E65100] flex items-center justify-center text-white shadow-lg shadow-[#FF6417]/25 group-hover:scale-110 transition-transform">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF6417] to-[#E65100] flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
                         <Icon className="w-7 h-7" />
                       </div>
                       <span className="text-3xl sm:text-4xl font-black text-white/20 group-hover:text-[#FF6417]/40 transition-colors">

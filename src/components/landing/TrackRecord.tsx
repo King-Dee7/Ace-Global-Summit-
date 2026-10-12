@@ -8,9 +8,6 @@ export default function TrackRecord() {
     <section className="py-20 sm:py-28 bg-[#4A040A] text-white border-t border-b border-[#FF6417]/15 relative">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-3xl p-8 sm:p-12 bg-gradient-to-r from-[#62060E] to-[#3B0207] border border-[#FF6417]/25 shadow-2xl relative overflow-hidden">
-          {/* Ambient badge */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[#FF6417]/10 blur-[90px] rounded-full pointer-events-none" />
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             <div className="lg:col-span-8">
               <GsapReveal direction="up">

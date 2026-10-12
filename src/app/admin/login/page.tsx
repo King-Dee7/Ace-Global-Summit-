@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Shield, Lock, Mail, ArrowRight, Loader2, Sparkles, ArrowLeft } from "lucide-react";
+import { Shield, Lock, Mail, Loader2, ArrowLeft } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 export default function AdminLoginPage() {
@@ -56,9 +56,6 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen bg-[#62060E] text-white flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#FF6417]/15 blur-[140px] rounded-full pointer-events-none" />
-
       <div className="w-full max-w-md relative z-10">
         <div className="mb-6">
           <Link
@@ -72,7 +69,7 @@ export default function AdminLoginPage() {
 
         <div className="rounded-3xl bg-gradient-to-b from-[#4A040A] to-[#3B0207] border border-[#FF6417]/30 shadow-2xl p-8 sm:p-10">
           <div className="text-center mb-8">
-            <div className="w-14 h-14 rounded-2xl bg-[#FF6417]/20 border border-[#FF6417]/40 flex items-center justify-center text-[#FF6417] mx-auto mb-4 shadow-lg shadow-[#FF6417]/20">
+            <div className="w-14 h-14 rounded-2xl bg-[#FF6417]/20 border border-[#FF6417]/40 flex items-center justify-center text-[#FF6417] mx-auto mb-4 shadow-md">
               <Shield className="w-7 h-7" />
             </div>
             <span className="text-[10px] font-bold tracking-widest uppercase text-[#FF6417] block mb-1">
@@ -124,15 +121,12 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#FF6417] to-[#E65100] hover:from-[#FF7B39] hover:to-[#FF6417] text-white font-bold text-sm shadow-xl shadow-[#FF6417]/30 transition-all flex items-center justify-center space-x-2 disabled:opacity-50 mt-2"
+              className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#FF6417] to-[#E65100] hover:from-[#FF7B39] hover:to-[#FF6417] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center space-x-2 disabled:opacity-50 mt-2"
             >
               {loading ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
               ) : (
-                <>
-                  <span>Sign In</span>
-                  <ArrowRight className="w-4 h-4" />
-                </>
+                <span>Sign In</span>
               )}
             </button>
           </form>
@@ -144,7 +138,6 @@ export default function AdminLoginPage() {
               type="button"
               className="w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-semibold text-white/90 hover:text-white transition-all flex items-center justify-center space-x-2"
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#FF6417]" />
               <span>Explore Dashboard (Demo Access)</span>
             </button>
             <p className="text-[11px] text-white/40 mt-2">

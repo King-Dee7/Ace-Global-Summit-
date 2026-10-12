@@ -65,21 +65,21 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faq" className="py-24 sm:py-32 bg-[#4A040A] text-white relative">
+    <section id="faq" className="py-24 sm:py-32 bg-[#FAF7F5] text-gray-900 relative border-t border-gray-200/80">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <GsapReveal direction="down">
-            <span className="text-xs sm:text-sm font-bold tracking-widest text-[#FF6417] uppercase block mb-3">
+            <span className="text-xs sm:text-sm font-bold tracking-widest text-[#E65100] uppercase block mb-3">
               Clear Answers
             </span>
           </GsapReveal>
           <GsapReveal direction="up" delay={0.1}>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+            <h2 className="text-3xl sm:text-5xl font-black text-[#62060E] tracking-tight leading-tight mb-4">
               Frequently Asked <span className="text-[#FF6417]">Questions</span>
             </h2>
           </GsapReveal>
           <GsapReveal direction="up" delay={0.2}>
-            <p className="text-base sm:text-lg text-white/80 font-light">
+            <p className="text-base sm:text-lg text-gray-600 font-normal">
               Everything you need to know about attending ACE GLOBAL SUMMIT.
             </p>
           </GsapReveal>
@@ -94,15 +94,15 @@ export default function FaqSection() {
                 <div
                   className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
                     isOpen
-                      ? "bg-[#62060E] border-[#FF6417]/50 shadow-lg shadow-[#FF6417]/10"
-                      : "bg-[#62060E]/60 border-white/10 hover:border-white/20"
+                      ? "bg-white border-[#FF6417] shadow-md"
+                      : "bg-white border-gray-200/80 hover:border-gray-300"
                   }`}
                 >
                   <button
                     onClick={() => toggle(idx)}
                     className="w-full p-6 text-left flex items-center justify-between space-x-4 focus:outline-none"
                   >
-                    <span className="text-base sm:text-lg font-bold text-white flex items-center space-x-3">
+                    <span className="text-base sm:text-lg font-bold text-[#62060E] flex items-center space-x-3">
                       <HelpCircle className="w-5 h-5 text-[#FF6417] shrink-0" />
                       <span>{faq.question}</span>
                     </span>
@@ -114,7 +114,7 @@ export default function FaqSection() {
                   </button>
 
                   {isOpen && (
-                    <div className="px-6 pb-6 pt-1 text-sm sm:text-base text-white/80 leading-relaxed font-light border-t border-white/5">
+                    <div className="px-6 pb-6 pt-1 text-sm sm:text-base text-gray-600 leading-relaxed font-normal border-t border-gray-100">
                       {faq.answer}
                     </div>
                   )}
@@ -126,13 +126,15 @@ export default function FaqSection() {
 
         {/* Contact Email Callout */}
         <GsapReveal direction="up" delay={0.3}>
-          <div className="mt-14 text-center p-6 rounded-2xl bg-white/5 border border-white/10 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <span className="text-sm text-white/80">Still have a question or need group booking assistance?</span>
+          <div className="mt-14 text-center p-6 rounded-2xl bg-white border border-gray-200 shadow-sm flex flex-col sm:flex-row items-center justify-center gap-3">
+            <span className="text-sm text-gray-600 font-medium">
+              Still have a question or need group booking assistance?
+            </span>
             <a
               href="mailto:info@reinventaf.com"
-              className="inline-flex items-center space-x-2 text-sm font-bold text-[#FF6417] hover:underline"
+              className="inline-flex items-center space-x-2 text-sm font-bold text-[#62060E] hover:text-[#FF6417]"
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-4 h-4 text-[#FF6417]" />
               <span>info@reinventaf.com</span>
             </a>
           </div>

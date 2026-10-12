@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { QrCode, ArrowLeft, CheckCircle2, AlertTriangle, XCircle, Search, Sparkles } from "lucide-react";
+import { QrCode, ArrowLeft, CheckCircle2, AlertTriangle, XCircle, Search } from "lucide-react";
 
 export default function AdminScanPage() {
   const [code, setCode] = useState("");
@@ -66,7 +66,7 @@ export default function AdminScanPage() {
         </div>
 
         <div className="rounded-3xl p-6 sm:p-8 bg-[#62060E] border-2 border-[#FF6417]/30 shadow-2xl text-center space-y-6">
-          <div className="w-16 h-16 rounded-2xl bg-[#FF6417]/20 border border-[#FF6417] text-[#FF6417] flex items-center justify-center mx-auto shadow-lg shadow-[#FF6417]/20">
+          <div className="w-16 h-16 rounded-2xl bg-[#FF6417]/20 border border-[#FF6417] text-[#FF6417] flex items-center justify-center mx-auto shadow-md">
             <QrCode className="w-8 h-8" />
           </div>
 
@@ -129,7 +129,7 @@ export default function AdminScanPage() {
             <button
               type="submit"
               disabled={loading || !code}
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#FF6417] to-[#E65100] hover:from-[#FF7B39] hover:to-[#FF6417] text-white font-black text-base shadow-xl shadow-[#FF6417]/30 transition-all disabled:opacity-50"
+              className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#FF6417] to-[#E65100] hover:from-[#FF7B39] hover:to-[#FF6417] text-white font-black text-base shadow-md transition-all disabled:opacity-50"
             >
               {loading ? "Checking..." : "Verify & Admit"}
             </button>
