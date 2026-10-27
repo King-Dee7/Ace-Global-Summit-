@@ -33,7 +33,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#62060E] text-white selection:bg-[#FF6417] selection:text-white relative">
+    <main className="min-h-screen bg-[#62060E] text-white selection:bg-[#FF6417] selection:text-white relative overflow-x-clip">
       {/* Sticky Navigation Bar */}
       <Navbar onSecureSeatClick={handleSecureSeat} />
 

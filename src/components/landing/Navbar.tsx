@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 interface NavbarProps {
@@ -30,32 +31,32 @@ export default function Navbar({ onSecureSeatClick }: NavbarProps) {
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-[#62060E]/90 backdrop-blur-md border-b border-[#FF6417]/20 py-3 shadow-2xl"
-          : "bg-transparent py-5"
-      }`}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 transition-colors duration-200 py-3.5 sm:py-4 bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo / Brand Name */}
-          <Link href="/" className="group flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF6417] to-[#E65100] flex items-center justify-center font-bold text-white shadow-md group-hover:scale-105 transition-transform">
-              <span className="tracking-tighter text-lg font-black">ACE</span>
-            </div>
-            <div>
-              <span className="font-extrabold text-white text-base sm:text-lg tracking-wider block">
-                ACE GLOBAL SUMMIT
-              </span>
-              <span className="text-[10px] uppercase tracking-widest text-[#FF6417] font-semibold block">
-                Accra 2026
-              </span>
-            </div>
+          {/* Logo / Brand Name - Co-Branded Lockup with Accent Divider */}
+          <Link href="/" className="group flex items-center">
+            <Image
+              src="/reinvent-logo-white.png"
+              alt="Reinvent Africa Network"
+              width={150}
+              height={38}
+              className="h-7 sm:h-8.5 md:h-9 w-auto object-contain transition-opacity group-hover:opacity-90"
+              priority
+            />
+            <div className="h-6 sm:h-7 md:h-7.5 w-[1.5px] bg-gradient-to-b from-[#FF6417] via-white/40 to-transparent mx-3 sm:mx-4" />
+            <Image
+              src="/Ace.png"
+              alt="ACE Global Summit"
+              width={150}
+              height={27}
+              className="h-5 sm:h-6 md:h-6.5 w-auto object-contain drop-shadow-[0_0_12px_rgba(255,100,23,0.25)] transition-transform group-hover:scale-[1.02]"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-white/90">
+          <nav className="hidden md:flex items-center space-x-8 text-sm font-normal text-white/80">
             <a
               href="#attend"
               onClick={(e) => handleNavClick(e, "attend")}
@@ -88,7 +89,7 @@ export default function Navbar({ onSecureSeatClick }: NavbarProps) {
 
           {/* Action Area: Sticky CTA */}
           <div className="flex items-center space-x-3">
-            {/* Sticky "Secure my seat" Button */}
+            {/* Sticky CTA Button */}
             <a
               href="#tickets"
               onClick={(e) => {
@@ -99,9 +100,9 @@ export default function Navbar({ onSecureSeatClick }: NavbarProps) {
                   handleNavClick(e, "tickets");
                 }
               }}
-              className="relative inline-flex items-center justify-center px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#FF6417] to-[#E65100] rounded-full shadow-md hover:opacity-90 active:scale-95 transition-all duration-200 group border border-white/20"
+              className="relative inline-flex items-center justify-center px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-medium uppercase tracking-wider text-white bg-gradient-to-r from-[#FF6417] to-[#E65100] rounded-full shadow-md hover:opacity-90 active:scale-95 transition-all duration-200 group border border-white/20"
             >
-              <span>Secure my seat</span>
+              <span>GET MY PASS</span>
             </a>
 
             {/* Mobile Hamburger Button */}
@@ -118,8 +119,8 @@ export default function Navbar({ onSecureSeatClick }: NavbarProps) {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#62060E] border-b border-[#FF6417]/30 px-6 py-5 shadow-2xl">
-          <div className="flex flex-col space-y-4 text-base font-medium text-white">
+        <div className="md:hidden bg-[#0A0A0A] px-6 py-5 shadow-2xl">
+          <div className="flex flex-col space-y-4 text-base font-normal text-white/90">
             <a
               href="#attend"
               onClick={(e) => handleNavClick(e, "attend")}

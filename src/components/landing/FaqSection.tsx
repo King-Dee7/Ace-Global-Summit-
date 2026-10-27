@@ -74,7 +74,7 @@ export default function FaqSection() {
             </span>
           </GsapReveal>
           <GsapReveal direction="up" delay={0.1}>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#62060E] tracking-tight leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal font-court text-[#62060E] tracking-tight leading-[1.12] mb-4" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
               Frequently Asked <span className="text-[#FF6417]">Questions</span>
             </h2>
           </GsapReveal>

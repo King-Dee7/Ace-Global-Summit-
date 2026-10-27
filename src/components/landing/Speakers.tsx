@@ -76,7 +76,7 @@ export default function Speakers() {
             </span>
           </GsapReveal>
           <GsapReveal direction="up" delay={0.1}>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal font-court text-white tracking-tight leading-[1.12]" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
               Speakers
             </h2>
           </GsapReveal>
@@ -119,7 +119,7 @@ export default function Speakers() {
             <div className="inline-flex items-center space-x-2 text-[#FF6417] text-xs font-bold uppercase tracking-wider mb-2">
               <span>Priority Access</span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+            <h3 className="text-2xl sm:text-3xl font-normal font-court text-white mb-3" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
               Get the first names before anyone else.
             </h3>
             <p className="text-xs sm:text-sm text-white/75 mb-6 max-w-md mx-auto">

@@ -1,103 +1,126 @@
 "use client";
 
-import { Palette, Rocket, Compass, TrendingUp, CheckCircle } from "lucide-react";
+import Image from "next/image";
 import GsapReveal from "../motion/GsapReveal";
 
-const ATTENDEE_GROUPS = [
+const COHORTS = [
   {
-    icon: Palette,
     title: "Creatives and professionals",
-    subtitle: "Turn talent into industry",
-    description: "Meet the people who turn talent into a career and a business.",
-    tags: ["Designers & Media", "Cultural Curators", "Executive Talent", "Agency Heads"],
+    description:
+      "Turn talent into industry. Meet the cultural curators, media leaders, designers, and executive talent transforming African creative capital into enduring business.",
   },
   {
-    icon: Rocket,
     title: "Founders and SME owners",
-    subtitle: "Scale ventures across borders",
-    description: "Share ideas, find collaborators and learn from people a step ahead.",
-    tags: ["High-Growth Startups", "SME Operators", "Tech Innovators", "Regional Scale-ups"],
+    description:
+      "Scale ventures across borders. Exchange battle-tested playbooks, connect with strategic collaborators, and learn from founders building sustainable regional scale.",
   },
   {
-    icon: Compass,
     title: "The diaspora",
-    subtitle: "Connect with the future of home",
-    description: "Reconnect with home through the people shaping what comes next.",
-    tags: ["Returning Professionals", "Diaspora Angels", "Global Operators", "Cultural Navigators"],
+    description:
+      "Connect with the future of home. Reconnect with high-traction ventures, innovative operators, and institutional networks shaping what comes next.",
   },
   {
-    icon: TrendingUp,
     title: "Investors and fund managers",
-    subtitle: "Deploy capital into real traction",
-    description: "Meet the ventures and leaders worth backing.",
-    tags: ["Venture Capitalists", "Private Equity", "Family Offices", "Angel Syndicates"],
+    description:
+      "Deploy capital into real traction. Discover qualified investment deal flow across venture capital, private equity, angel syndicates, and high-growth African assets.",
   },
 ];
 
 export default function WhosInTheRoom() {
   return (
-    <section id="attend" className="py-24 sm:py-32 bg-[#FAF7F5] text-gray-900 relative border-b border-gray-200/70">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mb-16">
+    <section id="attend" className="py-20 sm:py-28 lg:py-32 bg-[#62060E] text-white relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Full-width Section Title */}
+        <div className="max-w-4xl mb-12 sm:mb-16 lg:mb-20">
           <GsapReveal direction="up">
-            <span className="text-xs sm:text-sm font-bold tracking-widest text-[#E65100] uppercase block mb-3">
-              Who’s in the Room
-            </span>
-          </GsapReveal>
-
-          <GsapReveal direction="up" delay={0.1}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#62060E] tracking-tight leading-tight">
+            <h2
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal font-court text-white tracking-tight leading-[1.12]"
+              style={{ fontFamily: "'ModeCourt', sans-serif" }}
+            >
               If you build it, create it, fund it or come home to it,{" "}
               <span className="text-[#FF6417]">there is a seat for you.</span>
             </h2>
           </GsapReveal>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {ATTENDEE_GROUPS.map((group, idx) => {
-            const Icon = group.icon;
-            return (
-              <GsapReveal key={group.title} direction="up" delay={idx * 0.1}>
-                <div className="h-full rounded-3xl p-8 sm:p-10 bg-white border border-gray-200/90 hover:border-[#FF6417] transition-all duration-300 hover:shadow-xl group flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="w-14 h-14 rounded-2xl bg-[#62060E]/5 border border-[#62060E]/15 flex items-center justify-center text-[#62060E] group-hover:bg-[#FF6417] group-hover:text-white group-hover:border-[#FF6417] transition-all duration-300">
-                        <Icon className="w-7 h-7" />
-                      </div>
-                      <span className="text-xs font-bold text-gray-400 tracking-wider uppercase">
-                        Cohort 0{idx + 1}
-                      </span>
-                    </div>
-
-                    <h3 className="text-2xl font-bold text-[#62060E] mb-2 group-hover:text-[#E65100] transition-colors">
-                      {group.title}
-                    </h3>
-                    <p className="text-sm font-semibold text-[#E65100] mb-3">
-                      {group.subtitle}
-                    </p>
-                    <p className="text-base text-gray-600 leading-relaxed mb-6 font-normal">
-                      {group.description}
-                    </p>
-                  </div>
-
-                  {/* Representative profiles / tags */}
-                  <div className="pt-6 border-t border-gray-100 flex flex-wrap gap-2">
-                    {group.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex items-center space-x-1.5 text-xs text-gray-700 bg-[#FAF7F5] px-3 py-1.5 rounded-full border border-gray-200"
-                      >
-                        <CheckCircle className="w-3.5 h-3.5 text-[#FF6417]" />
-                        <span>{tag}</span>
-                      </span>
-                    ))}
+        {/* 2-Column Split: Overlapping Photos on Left & Cohort List on Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 xl:gap-16 items-center">
+          
+          {/* Left Column: Overlapping Polaroid Photos (Matching Dimensions) with Orange Sticker */}
+          <div className="lg:col-span-7 relative pt-6 sm:pt-8 pb-6 sm:pb-0 pl-6 sm:pl-10 md:pl-12">
+            <GsapReveal direction="up" delay={0.15}>
+              <div className="relative mx-auto lg:mx-0 max-w-[340px] sm:max-w-[420px] md:max-w-[460px] xl:max-w-[490px]">
+                
+                {/* Photo 1: Back Photo (Exact Same Dimension, Shifted Top-Left & Tilted) */}
+                <div 
+                  className="absolute inset-0 -translate-x-8 sm:-translate-x-12 md:-translate-x-14 -translate-y-4 sm:-translate-y-6 md:-translate-y-7 -rotate-[5deg] bg-white p-2.5 sm:p-3 shadow-xl z-0 transition-transform duration-500 hover:-rotate-3"
+                  aria-hidden="true"
+                >
+                  <div className="relative w-full h-full overflow-hidden bg-gray-900">
+                    <Image
+                      src="/GOTOGOAL(16).jpg"
+                      alt="ACE Global Summit Attendees"
+                      fill
+                      sizes="(max-width: 768px) 340px, 490px"
+                      className="object-cover object-left"
+                    />
                   </div>
                 </div>
+
+                {/* Photo 2: Front Photo (Main Landscape Polaroid) */}
+                <div className="relative z-10 -rotate-[1.5deg] bg-white p-2.5 sm:p-3 shadow-2xl transition-transform duration-500 hover:rotate-0">
+                  <div className="relative aspect-[16/11] sm:aspect-[4/3] w-full overflow-hidden bg-gray-900">
+                    <Image
+                      src="/GOTOGOAL(16).jpg"
+                      alt="ACE Global Summit In Accra"
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 340px, 490px"
+                      className="object-cover object-center"
+                    />
+                  </div>
+                </div>
+
+                {/* Orange Sticker Banner "WHOS IN THE ROOM" (Prominent & Straddling top-left of front photo) */}
+                <div className="absolute -top-5 sm:-top-7 md:-top-8 left-3 sm:left-6 md:left-8 z-30 -rotate-[2.5deg] shadow-2xl pointer-events-none select-none">
+                  <div className="bg-[#FF6417] px-5 sm:px-7 md:px-8 py-2 sm:py-2.5 md:py-3 text-white font-black text-sm sm:text-lg md:text-xl lg:text-2xl tracking-wider uppercase whitespace-nowrap">
+                    WHOS IN THE ROOM
+                  </div>
+                </div>
+
+              </div>
+            </GsapReveal>
+          </div>
+
+          {/* Right Column: Editorial Cohort Pillars */}
+          <div className="lg:col-span-5 flex flex-col justify-center space-y-6 sm:space-y-8 lg:pl-2">
+            {COHORTS.map((cohort, idx) => (
+              <GsapReveal key={cohort.title} direction="up" delay={0.1 + idx * 0.1}>
+                <div className="group">
+                  <div className="inline-block bg-[#FF6417] px-3 py-1 text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase mb-2 sm:mb-2.5 shadow-sm">
+                    {cohort.title}
+                  </div>
+                  <p className="text-white/80 font-light text-sm sm:text-[15px] md:text-base leading-relaxed max-w-md">
+                    {cohort.description}
+                  </p>
+                </div>
               </GsapReveal>
-            );
-          })}
+            ))}
+          </div>
+
         </div>
+
       </div>
+
+      {/* Seamless Fade: Softly decrease opacity on the final 3rd of the winish background */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-44 sm:h-60 md:h-72 pointer-events-none z-0"
+        style={{
+          background: "linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.12) 35%, rgba(255, 255, 255, 0.35) 70%, rgba(255, 255, 255, 0.55) 100%)"
+        }}
+        aria-hidden="true"
+      />
     </section>
   );
 }

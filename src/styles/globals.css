@@ -9,6 +9,16 @@
   --color-white: #FFFFFF;
 }
 
+/* Hide scrollbar completely while keeping scroll functionality */
+html,
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE / Edge */
+}
+::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
 /* Lenis smooth scroll baseline */
 html.lenis,
 html.lenis body {
@@ -29,21 +39,6 @@ html.lenis body {
 
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #3B0207;
-}
-::-webkit-scrollbar-thumb {
-  background: #E65100;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #FF6417;
 }
 
 /* Glassmorphism and ambient glows */
@@ -88,4 +83,19 @@ html.lenis body {
   background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Mode Court Headline Font */
+@font-face {
+  font-family: 'ModeCourt';
+  src: url('/font/Mode%20Court%20Font/Mode%20Court/Mode%20Court.otf') format('opentype'),
+       url('/font/Mode%20Court%20Font/Mode%20Court/Mode%20Court.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-court,
+.font-modecourt {
+  font-family: 'ModeCourt', sans-serif !important;
 }

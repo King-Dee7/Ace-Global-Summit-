@@ -18,7 +18,7 @@ export default function FinalCta({ onSecureSeatClick }: FinalCtaProps) {
         </GsapReveal>
 
         <GsapReveal direction="up" delay={0.1}>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight leading-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal font-court text-white tracking-tight leading-[1.12] mb-6" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
             One day in Accra. <br />
             <span className="text-gradient-orange">
               Come meet the people building what's next.

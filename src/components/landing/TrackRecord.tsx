@@ -18,7 +18,7 @@ export default function TrackRecord() {
               </GsapReveal>
 
               <GsapReveal direction="up" delay={0.1}>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight mb-4">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-normal font-court text-white leading-tight mb-4" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
                   From the team behind the <br />
                   <span className="text-[#FF6417]">From Go To Goal Summit.</span>
                 </h3>

@@ -9,6 +9,12 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Disable browser scroll restoration so reloads always start at top
+    if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+      window.scrollTo(0, 0);
+    }
+
     // Register GSAP plugins
     if (typeof window !== "undefined") {
       gsap.registerPlugin(ScrollTrigger);
@@ -25,6 +31,9 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
     });
 
     lenisRef.current = lenis;
+
+    // Reset Lenis scroll to top immediately on fresh load
+    lenis.scrollTo(0, { immediate: true });
 
     // Synchronize Lenis with GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);

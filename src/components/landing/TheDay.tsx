@@ -2,62 +2,99 @@
 
 import { useState } from "react";
 import {
-  Mic,
-  Flame,
-  UsersRound,
-  Wine,
-  Handshake,
-  BriefcaseBusiness,
+  MapPin,
+  Clock,
   Check,
   Send,
   Loader2,
-  Clock,
 } from "lucide-react";
 import GsapReveal from "../motion/GsapReveal";
 
 const SCHEDULE_BLOCKS = [
   {
-    icon: Mic,
+    num: "01",
+    pill: "Morning",
+    timeOfDay: "Morning Focus",
+    date: "Dec 23, 2026",
     title: "Keynote Addresses & Strategic Panels",
-    time: "Morning Focus",
+    venue: "Main Plenary Hall • Accra Marriott",
+    timeRange: "09:00 AM – 11:30 AM",
     description:
       "Visionary opening addresses and high-level plenary panels dissecting global capital flows, cross-border African ventures, and regional economic convergence.",
+    accent: {
+      pillBg: "bg-[#2DD4BF]",
+      pillText: "text-gray-950",
+      border: "border-[#2DD4BF]",
+      iconColor: "text-[#2DD4BF]",
+    },
   },
   {
-    icon: Flame,
+    num: "02",
+    pill: "Midday",
+    timeOfDay: "Midday Exchange",
+    date: "Dec 23, 2026",
     title: "Fireside Chats",
-    time: "Midday Exchange",
+    venue: "Executive Stage • Accra Marriott",
+    timeRange: "11:45 AM – 01:15 PM",
     description:
       "Unfiltered, intimate dialogues with frontier operators, unicorn founders, and veteran institutional investors sharing battle-tested tactics.",
+    accent: {
+      pillBg: "bg-[#818CF8]",
+      pillText: "text-gray-950",
+      border: "border-[#818CF8]",
+      iconColor: "text-[#818CF8]",
+    },
   },
   {
-    icon: UsersRound,
+    num: "03",
+    pill: "Breakout",
+    timeOfDay: "Interactive Masterclasses",
+    date: "Dec 23, 2026",
     title: "Audience Engagement Sessions",
-    time: "Interactive Masterclasses",
+    venue: "Breakout Pavilions & Deal Tables",
+    timeRange: "02:00 PM – 03:30 PM",
     description:
       "Curated breakout discussions, open-floor Q&A sessions, and collaborative problem-solving circles breaking down barriers between stage and audience.",
+    accent: {
+      pillBg: "bg-[#FB923C]",
+      pillText: "text-gray-950",
+      border: "border-[#FB923C]",
+      iconColor: "text-[#FB923C]",
+    },
   },
   {
-    icon: Handshake,
+    num: "04",
+    pill: "Afternoon",
+    timeOfDay: "Afternoon Landmark",
+    date: "Dec 23, 2026",
     title: "Partnership Announcements",
-    time: "Afternoon Landmark",
+    venue: "Main Stage & Press Gallery",
+    timeRange: "03:45 PM – 05:00 PM",
     description:
       "Live cross-border commercial pacts, ecosystem commitments, and public-private partnership unveilings driving tangible investment into West Africa.",
+    accent: {
+      pillBg: "bg-[#F472B6]",
+      pillText: "text-gray-950",
+      border: "border-[#F472B6]",
+      iconColor: "text-[#F472B6]",
+    },
   },
   {
-    icon: BriefcaseBusiness,
-    title: "Investor Dealroom",
-    time: "Curated Closed Session • VIP Access",
-    isDealroom: true,
-    description:
-      "A closed, curated session where investor and founder conversations continue one on one. Dedicated deal-making tables connecting vetted founders directly with allocators.",
-  },
-  {
-    icon: Wine,
+    num: "05",
+    pill: "Evening",
+    timeOfDay: "Evening Twilight Mixer",
+    date: "Dec 23, 2026",
     title: "Executive Networking Reception",
-    time: "Evening Twilight Mixer",
+    venue: "Poolside Terrace & Lounge • Accra Marriott",
+    timeRange: "06:00 PM – 09:30 PM",
     description:
       "An upscale cocktail evening with live music and curated hors d'oeuvres where summit conversations translate into enduring partnerships and closed deals.",
+    accent: {
+      pillBg: "bg-[#38BDF8]",
+      pillText: "text-gray-950",
+      border: "border-[#38BDF8]",
+      iconColor: "text-[#38BDF8]",
+    },
   },
 ];
 
@@ -106,7 +143,7 @@ export default function TheDay() {
             </span>
           </GsapReveal>
           <GsapReveal direction="up" delay={0.1}>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#62060E] tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal font-court text-[#62060E] tracking-tight leading-[1.12]" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
               What your day <span className="text-[#FF6417]">looks like.</span>
             </h2>
           </GsapReveal>
@@ -117,74 +154,85 @@ export default function TheDay() {
           </GsapReveal>
         </div>
 
-        {/* Schedule Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-          {SCHEDULE_BLOCKS.map((block, idx) => {
-            const Icon = block.icon;
-            return (
-              <GsapReveal key={block.title} direction="up" delay={idx * 0.08}>
+        {/* Day at a Glance Card Panel (Matching Inspo) */}
+        <GsapReveal direction="up" delay={0.25}>
+          <div className="max-w-4xl mx-auto rounded-3xl sm:rounded-[36px] bg-[#141416] border border-white/10 p-6 sm:p-10 md:p-12 shadow-2xl relative mb-20">
+            {/* Header: Accent square + Title */}
+            <div className="flex items-center gap-3 mb-8 sm:mb-10 pb-6 border-b border-white/10">
+              <span className="w-3.5 h-3.5 bg-[#FF6417] rounded-sm inline-block shrink-0 shadow-sm shadow-[#FF6417]/50" />
+              <h3
+                className="text-2xl sm:text-3xl font-normal font-court text-white tracking-tight"
+                style={{ fontFamily: "'ModeCourt', sans-serif" }}
+              >
+                Day at a glance
+              </h3>
+            </div>
+
+            {/* Timeline Rows */}
+            <div className="space-y-8 sm:space-y-10">
+              {SCHEDULE_BLOCKS.map((block) => (
                 <div
-                  className={`h-full p-8 rounded-3xl border transition-all duration-300 flex flex-col justify-between ${
-                    block.isDealroom
-                      ? "bg-gradient-to-br from-[#62060E] to-[#3B0207] text-white border-[#FF6417] shadow-xl shadow-[#62060E]/20"
-                      : "bg-[#FAF7F5] border-gray-200/80 hover:border-[#FF6417] hover:shadow-lg text-gray-900"
-                  }`}
+                  key={block.num}
+                  className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8 pb-8 sm:pb-10 border-b border-white/10 last:border-b-0 last:pb-0"
                 >
-                  <div>
-                    <div className="flex items-center justify-between mb-6">
-                      <div
-                        className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                          block.isDealroom
-                            ? "bg-[#FF6417] text-white shadow-sm"
-                            : "bg-white text-[#62060E] border border-gray-200 shadow-sm"
-                        }`}
+                  {/* Left Column: Pill + Big Number + Subtext */}
+                  <div className="shrink-0 sm:w-44 flex sm:flex-col items-center sm:items-start justify-between sm:justify-start gap-3 sm:gap-2">
+                    <div className="flex items-center gap-2.5">
+                      <span
+                        className={`px-2.5 py-0.5 rounded-md text-[11px] font-black uppercase tracking-wider ${block.accent.pillBg} ${block.accent.pillText}`}
                       >
-                        <Icon className="w-6 h-6" />
+                        {block.pill}
+                      </span>
+                      <span className="text-4xl sm:text-5xl font-black text-white leading-none tracking-tight">
+                        {block.num}
+                      </span>
+                    </div>
+                    <div>
+                      <div className="text-xs sm:text-sm text-gray-400 font-medium">
+                        {block.date}
                       </div>
-                      <div
-                        className={`flex items-center space-x-1.5 text-xs font-semibold px-3 py-1 rounded-full border ${
-                          block.isDealroom
-                            ? "bg-white/10 border-white/20 text-white/90"
-                            : "bg-white border-gray-200 text-gray-600"
-                        }`}
-                      >
-                        <Clock className="w-3 h-3 text-[#FF6417]" />
-                        <span>{block.time}</span>
+                      <div className="text-[11px] text-[#FF6417] font-semibold tracking-wide uppercase mt-0.5">
+                        {block.timeOfDay}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Left Accent Colored Border + Content */}
+                  <div className={`flex-1 pl-4 sm:pl-6 border-l-2 ${block.accent.border}`}>
+                    <h4
+                      className="text-xl sm:text-2xl font-normal font-court text-white tracking-tight leading-snug mb-2"
+                      style={{ fontFamily: "'ModeCourt', sans-serif" }}
+                    >
+                      {block.title}
+                    </h4>
+
+                    {/* Location & Time Metadata */}
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs sm:text-sm text-gray-300 mb-3">
+                      <div className="flex items-center gap-1.5">
+                        <MapPin className={`w-3.5 h-3.5 ${block.accent.iconColor}`} />
+                        <span>{block.venue}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Clock className={`w-3.5 h-3.5 ${block.accent.iconColor}`} />
+                        <span>{block.timeRange}</span>
                       </div>
                     </div>
 
-                    <h3
-                      className={`text-xl font-bold mb-3 leading-snug ${
-                        block.isDealroom ? "text-white" : "text-[#62060E]"
-                      }`}
-                    >
-                      {block.title}
-                    </h3>
-                    <p
-                      className={`text-sm leading-relaxed font-normal ${
-                        block.isDealroom ? "text-white/80" : "text-gray-600"
-                      }`}
-                    >
+                    {/* Description */}
+                    <p className="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">
                       {block.description}
                     </p>
                   </div>
-
-                  {block.isDealroom && (
-                    <div className="mt-6 pt-4 border-t border-[#FF6417]/40 text-xs font-bold text-[#FF6417] flex items-center justify-between">
-                      <span>Exclusive to VIP Ticket Holders</span>
-                      <span className="underline">Limited capacity</span>
-                    </div>
-                  )}
                 </div>
-              </GsapReveal>
-            );
-          })}
-        </div>
+              ))}
+            </div>
+          </div>
+        </GsapReveal>
 
         {/* Full Schedule Notify Form */}
         <GsapReveal direction="up" delay={0.3}>
           <div className="max-w-3xl mx-auto rounded-3xl p-8 sm:p-12 bg-[#62060E] border border-[#FF6417]/30 shadow-2xl relative overflow-hidden text-center text-white">
-            <h3 className="text-2xl sm:text-3xl font-black text-white mb-3">
+            <h3 className="text-2xl sm:text-3xl font-normal font-court text-white mb-3" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
               Be first to see the full schedule.
             </h3>
             <p className="text-sm sm:text-base text-white/80 mb-8 max-w-xl mx-auto font-light">

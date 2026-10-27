@@ -46,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} scroll-smooth`}>
+    <html lang="en" className={inter.variable}>
       <body className="bg-[#62060E] text-white font-sans antialiased selection:bg-[#FF6417] selection:text-white">
         <LenisProvider>{children}</LenisProvider>
       </body>

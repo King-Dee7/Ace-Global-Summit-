@@ -31,7 +31,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-clash)", "var(--font-inter)", "sans-serif"],
+        display: ["'ModeCourt'", "var(--font-inter)", "sans-serif"],
+        court: ["'ModeCourt'", "sans-serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
