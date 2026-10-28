@@ -52,23 +52,23 @@ export default function HomePage() {
       {/* 5. The Day (Schedule & Interest Form) */}
       <TheDay />
 
-      {/* 6. Speakers (Teasers & Lineup Form) */}
+      {/* 6. Speakers */}
       <Speakers />
 
-      {/* 7. Tickets (Individual & Group of 3 with Paystack) */}
-      <TicketsSection onSelectTicket={(ticket) => setSelectedTicket(ticket)} />
-
-      {/* 8. Partners */}
+      {/* 7. Partners */}
       <Partners />
 
-      {/* 9. Track Record */}
+      {/* 8. Track Record */}
       <TrackRecord />
 
-      {/* 10. Venue (Accra Marriott Hotel) */}
+      {/* 9. Venue (Accra Marriott Hotel) */}
       <Venue />
 
-      {/* 11. FAQ */}
+      {/* 10. FAQ */}
       <FaqSection />
+
+      {/* 11. Tickets (Individual & Group of 3 with Paystack) */}
+      <TicketsSection onSelectTicket={(ticket) => setSelectedTicket(ticket)} />
 
       {/* 12. Final Call to Action */}
       <FinalCta onSecureSeatClick={handleSecureSeat} />

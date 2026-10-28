@@ -1,101 +1,63 @@
 "use client";
 
-import { useState } from "react";
-import {
-  MapPin,
-  Clock,
-  Check,
-  Send,
-  Loader2,
-} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { MapPin, Check, ArrowRight, Loader2 } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import GsapReveal from "../motion/GsapReveal";
 
 const SCHEDULE_BLOCKS = [
   {
     num: "01",
-    pill: "Morning",
-    timeOfDay: "Morning Focus",
-    date: "Dec 23, 2026",
+    phase: "Morning",
+    start: "09:00",
+    end: "11:30",
     title: "Keynote Addresses & Strategic Panels",
-    venue: "Main Plenary Hall • Accra Marriott",
-    timeRange: "09:00 AM – 11:30 AM",
     description:
       "Visionary opening addresses and high-level plenary panels dissecting global capital flows, cross-border African ventures, and regional economic convergence.",
-    accent: {
-      pillBg: "bg-[#2DD4BF]",
-      pillText: "text-gray-950",
-      border: "border-[#2DD4BF]",
-      iconColor: "text-[#2DD4BF]",
-    },
   },
   {
     num: "02",
-    pill: "Midday",
-    timeOfDay: "Midday Exchange",
-    date: "Dec 23, 2026",
+    phase: "Midday",
+    start: "11:45",
+    end: "13:15",
     title: "Fireside Chats",
-    venue: "Executive Stage • Accra Marriott",
-    timeRange: "11:45 AM – 01:15 PM",
     description:
       "Unfiltered, intimate dialogues with frontier operators, unicorn founders, and veteran institutional investors sharing battle-tested tactics.",
-    accent: {
-      pillBg: "bg-[#818CF8]",
-      pillText: "text-gray-950",
-      border: "border-[#818CF8]",
-      iconColor: "text-[#818CF8]",
-    },
   },
   {
     num: "03",
-    pill: "Breakout",
-    timeOfDay: "Interactive Masterclasses",
-    date: "Dec 23, 2026",
+    phase: "Breakout",
+    start: "14:00",
+    end: "15:30",
     title: "Audience Engagement Sessions",
-    venue: "Breakout Pavilions & Deal Tables",
-    timeRange: "02:00 PM – 03:30 PM",
     description:
       "Curated breakout discussions, open-floor Q&A sessions, and collaborative problem-solving circles breaking down barriers between stage and audience.",
-    accent: {
-      pillBg: "bg-[#FB923C]",
-      pillText: "text-gray-950",
-      border: "border-[#FB923C]",
-      iconColor: "text-[#FB923C]",
-    },
   },
   {
     num: "04",
-    pill: "Afternoon",
-    timeOfDay: "Afternoon Landmark",
-    date: "Dec 23, 2026",
+    phase: "Afternoon",
+    start: "15:45",
+    end: "17:00",
     title: "Partnership Announcements",
-    venue: "Main Stage & Press Gallery",
-    timeRange: "03:45 PM – 05:00 PM",
     description:
       "Live cross-border commercial pacts, ecosystem commitments, and public-private partnership unveilings driving tangible investment into West Africa.",
-    accent: {
-      pillBg: "bg-[#F472B6]",
-      pillText: "text-gray-950",
-      border: "border-[#F472B6]",
-      iconColor: "text-[#F472B6]",
-    },
   },
   {
     num: "05",
-    pill: "Evening",
-    timeOfDay: "Evening Twilight Mixer",
-    date: "Dec 23, 2026",
+    phase: "Evening",
+    start: "18:00",
+    end: "21:30",
     title: "Executive Networking Reception",
-    venue: "Poolside Terrace & Lounge • Accra Marriott",
-    timeRange: "06:00 PM – 09:30 PM",
     description:
       "An upscale cocktail evening with live music and curated hors d'oeuvres where summit conversations translate into enduring partnerships and closed deals.",
-    accent: {
-      pillBg: "bg-[#38BDF8]",
-      pillText: "text-gray-950",
-      border: "border-[#38BDF8]",
-      iconColor: "text-[#38BDF8]",
-    },
   },
+];
+
+const DAY_STATS = [
+  { value: "12.5", label: "Hours" },
+  { value: "05", label: "Sessions" },
+  { value: "01", label: "Venue" },
 ];
 
 export default function TheDay() {
@@ -103,6 +65,44 @@ export default function TheDay() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
+  const listRef = useRef<HTMLOListElement>(null);
+  const railFillRef = useRef<HTMLSpanElement>(null);
+
+  // Scroll-linked rail fill + node activation
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const list = listRef.current;
+    const fill = railFillRef.current;
+    if (!list || !fill) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        fill,
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: list,
+            start: "top 65%",
+            end: "bottom 65%",
+            scrub: true,
+          },
+        }
+      );
+
+      list.querySelectorAll<HTMLLIElement>("li").forEach((item) => {
+        ScrollTrigger.create({
+          trigger: item,
+          start: "top 65%",
+          toggleClass: { targets: item, className: "is-active" },
+        });
+      });
+    }, list);
+
+    return () => ctx.revert();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -133,149 +133,166 @@ export default function TheDay() {
     }
   };
 
+  // Rendered in the sticky column on desktop and after the timeline on mobile
+  const notifyForm = (
+    <div className="rounded-2xl bg-[#62060E] p-6 sm:p-7 text-white relative overflow-hidden">
+      <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-[#FF6417]/25 blur-3xl pointer-events-none" />
+      <div className="relative">
+        <h3 className="text-xl sm:text-2xl font-normal font-court text-white mb-2">
+          Be first to see the full schedule.
+        </h3>
+        <p className="text-sm text-white/70 mb-5 font-light leading-relaxed">
+          The session-by-session timetable and stage breakdowns drop ahead of the summit.
+        </p>
+
+        {submitted ? (
+          <div className="flex items-start gap-3 text-sm text-white">
+            <span className="mt-0.5 w-5 h-5 rounded-full bg-[#FF6417] flex items-center justify-center shrink-0">
+              <Check className="w-3 h-3" />
+            </span>
+            <span>You&apos;re on the list. We&apos;ll email you the moment it goes live.</span>
+          </div>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className="flex items-center gap-2 rounded-full bg-white/10 border border-white/15 p-1.5 focus-within:border-[#FF6417] transition-colors"
+          >
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Your email"
+              required
+              aria-label="Email address"
+              className="flex-1 min-w-0 bg-transparent px-4 py-2 text-sm text-white placeholder-white/50 focus:outline-none"
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              aria-label="Notify me"
+              className="shrink-0 h-10 px-5 rounded-full bg-[#FF6417] hover:bg-[#FF7B39] text-white text-sm font-bold transition-colors flex items-center gap-2 disabled:opacity-50"
+            >
+              {loading ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <>
+                  <span>Notify me</span>
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          </form>
+        )}
+
+        {errorMsg && <p className="text-xs text-rose-300 mt-3">{errorMsg}</p>}
+      </div>
+    </div>
+  );
+
   return (
     <section id="programme" className="py-24 sm:py-32 bg-white text-gray-900 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mb-16">
-          <GsapReveal direction="up">
-            <span className="text-xs sm:text-sm font-bold tracking-widest text-[#E65100] uppercase block mb-3">
-              One Immersive Day • Dec 23, 2026
-            </span>
-          </GsapReveal>
-          <GsapReveal direction="up" delay={0.1}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal font-court text-[#62060E] tracking-tight leading-[1.12]" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
-              What your day <span className="text-[#FF6417]">looks like.</span>
-            </h2>
-          </GsapReveal>
-          <GsapReveal direction="up" delay={0.2}>
-            <p className="mt-4 text-lg text-gray-600 font-normal">
-              A meticulously choreographed schedule designed to maximize high-value serendipity, actionable insights, and structured deal flow.
-            </p>
-          </GsapReveal>
-        </div>
+        <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-14 lg:gap-20">
+          {/* Left: sticky intro */}
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <GsapReveal direction="up" delay={0.1}>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-normal font-court text-[#62060E] tracking-tight leading-[1.05]">
+                What your day <span className="text-[#FF6417]">looks like.</span>
+              </h2>
+            </GsapReveal>
+            <GsapReveal direction="up" delay={0.2}>
+              <p className="mt-6 text-base sm:text-lg text-gray-600 leading-relaxed max-w-md">
+                A meticulously choreographed schedule designed to maximize high-value serendipity, actionable insights, and structured deal flow.
+              </p>
+            </GsapReveal>
 
-        {/* Day at a Glance Card Panel (Matching Inspo) */}
-        <GsapReveal direction="up" delay={0.25}>
-          <div className="max-w-4xl mx-auto rounded-3xl sm:rounded-[36px] bg-[#141416] border border-white/10 p-6 sm:p-10 md:p-12 shadow-2xl relative mb-20">
-            {/* Header: Accent square + Title */}
-            <div className="flex items-center gap-3 mb-8 sm:mb-10 pb-6 border-b border-white/10">
-              <span className="w-3.5 h-3.5 bg-[#FF6417] rounded-sm inline-block shrink-0 shadow-sm shadow-[#FF6417]/50" />
-              <h3
-                className="text-2xl sm:text-3xl font-normal font-court text-white tracking-tight"
-                style={{ fontFamily: "'ModeCourt', sans-serif" }}
-              >
-                Day at a glance
-              </h3>
-            </div>
+            <GsapReveal direction="up" delay={0.25}>
+              <dl className="mt-10 grid grid-cols-3 divide-x divide-gray-200">
+                {DAY_STATS.map((stat) => (
+                  <div key={stat.label} className="py-5 px-4 first:pl-0 flex flex-col-reverse">
+                    <dt className="text-[11px] uppercase tracking-[0.18em] text-gray-500 font-semibold mt-2">
+                      {stat.label}
+                    </dt>
+                    <dd className="text-3xl sm:text-4xl font-court text-[#62060E] leading-none">
+                      {stat.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-4 flex items-center gap-2 text-sm text-gray-500">
+                <MapPin className="w-4 h-4 text-[#E65100]" />
+                Accra Marriott Hotel, Airport City
+              </p>
+            </GsapReveal>
 
-            {/* Timeline Rows */}
-            <div className="space-y-8 sm:space-y-10">
+            <GsapReveal direction="up" delay={0.3} className="hidden lg:block mt-10">
+              {notifyForm}
+            </GsapReveal>
+          </div>
+
+          {/* Right: timeline */}
+          <div>
+            <ol ref={listRef} className="relative">
+              {/* Rail (aligned to node column centre) */}
+              <span
+                aria-hidden
+                className="absolute top-3 bottom-3 left-[9.5px] sm:left-[141.5px] w-px bg-gray-200"
+              />
+              <span
+                ref={railFillRef}
+                aria-hidden
+                className="absolute top-3 bottom-3 left-[9.5px] sm:left-[141.5px] w-px bg-gradient-to-b from-[#FF6417] to-[#62060E] origin-top scale-y-0"
+              />
+
               {SCHEDULE_BLOCKS.map((block) => (
-                <div
+                <li
                   key={block.num}
-                  className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8 pb-8 sm:pb-10 border-b border-white/10 last:border-b-0 last:pb-0"
+                  className="group relative grid grid-cols-[20px_minmax(0,1fr)] sm:grid-cols-[100px_20px_minmax(0,1fr)] gap-x-5 sm:gap-x-8 pb-12 sm:pb-14 last:pb-0"
                 >
-                  {/* Left Column: Pill + Big Number + Subtext */}
-                  <div className="shrink-0 sm:w-44 flex sm:flex-col items-center sm:items-start justify-between sm:justify-start gap-3 sm:gap-2">
-                    <div className="flex items-center gap-2.5">
-                      <span
-                        className={`px-2.5 py-0.5 rounded-md text-[11px] font-black uppercase tracking-wider ${block.accent.pillBg} ${block.accent.pillText}`}
-                      >
-                        {block.pill}
-                      </span>
-                      <span className="text-4xl sm:text-5xl font-black text-white leading-none tracking-tight">
-                        {block.num}
-                      </span>
+                  {/* Time (desktop) */}
+                  <div className="hidden sm:block text-right pt-0.5">
+                    <div className="text-2xl font-court text-[#62060E] leading-none tabular-nums">
+                      {block.start}
                     </div>
-                    <div>
-                      <div className="text-xs sm:text-sm text-gray-400 font-medium">
-                        {block.date}
-                      </div>
-                      <div className="text-[11px] text-[#FF6417] font-semibold tracking-wide uppercase mt-0.5">
-                        {block.timeOfDay}
-                      </div>
+                    <div className="mt-1.5 text-xs text-gray-400 tabular-nums">
+                      to {block.end}
                     </div>
                   </div>
 
-                  {/* Right Column: Left Accent Colored Border + Content */}
-                  <div className={`flex-1 pl-4 sm:pl-6 border-l-2 ${block.accent.border}`}>
-                    <h4
-                      className="text-xl sm:text-2xl font-normal font-court text-white tracking-tight leading-snug mb-2"
-                      style={{ fontFamily: "'ModeCourt', sans-serif" }}
-                    >
-                      {block.title}
-                    </h4>
+                  {/* Node */}
+                  <div className="relative flex justify-center pt-1.5">
+                    <span className="relative z-10 w-5 h-5 rounded-full bg-white border border-gray-300 flex items-center justify-center transition-colors duration-500 group-[.is-active]:border-[#FF6417]">
+                      <span className="w-2 h-2 rounded-full bg-gray-300 transition-all duration-500 group-[.is-active]:bg-[#FF6417] group-[.is-active]:scale-125" />
+                    </span>
+                  </div>
 
-                    {/* Location & Time Metadata */}
-                    <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs sm:text-sm text-gray-300 mb-3">
-                      <div className="flex items-center gap-1.5">
-                        <MapPin className={`w-3.5 h-3.5 ${block.accent.iconColor}`} />
-                        <span>{block.venue}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <Clock className={`w-3.5 h-3.5 ${block.accent.iconColor}`} />
-                        <span>{block.timeRange}</span>
-                      </div>
+                  {/* Content */}
+                  <div className="rounded-2xl -mt-3 p-4 sm:p-6 -ml-4 sm:-ml-6 transition-colors duration-300 group-hover:bg-[#FFF6F1]">
+                    <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em]">
+                      <span className="text-[#E65100]">{block.num}</span>
+                      <span className="text-gray-500">{block.phase}</span>
+                      <span className="sm:hidden ml-auto text-gray-500 normal-case tracking-normal font-semibold tabular-nums">
+                        {block.start} – {block.end}
+                      </span>
                     </div>
 
-                    {/* Description */}
-                    <p className="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">
+                    <h3 className="mt-3 text-2xl sm:text-3xl font-normal font-court text-gray-900 tracking-tight leading-tight transition-colors duration-300 group-hover:text-[#62060E]">
+                      {block.title}
+                    </h3>
+
+                    <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed max-w-xl">
                       {block.description}
                     </p>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
+
+            <GsapReveal direction="up" className="lg:hidden mt-14">
+              {notifyForm}
+            </GsapReveal>
           </div>
-        </GsapReveal>
-
-        {/* Full Schedule Notify Form */}
-        <GsapReveal direction="up" delay={0.3}>
-          <div className="max-w-3xl mx-auto rounded-3xl p-8 sm:p-12 bg-[#62060E] border border-[#FF6417]/30 shadow-2xl relative overflow-hidden text-center text-white">
-            <h3 className="text-2xl sm:text-3xl font-normal font-court text-white mb-3" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
-              Be first to see the full schedule.
-            </h3>
-            <p className="text-sm sm:text-base text-white/80 mb-8 max-w-xl mx-auto font-light">
-              Our comprehensive session-by-session timetable and stage breakdowns will be released ahead of the summit.
-            </p>
-
-            {submitted ? (
-              <div className="p-4 rounded-2xl bg-[#FF6417]/20 border border-[#FF6417]/50 text-white flex items-center justify-center space-x-3">
-                <Check className="w-5 h-5 text-[#FF6417]" />
-                <span className="font-semibold text-sm sm:text-base">
-                  You're on the list. We will email you the moment the schedule goes live.
-                </span>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  className="flex-1 px-5 py-3.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-[#FF6417] text-sm"
-                />
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="px-7 py-3.5 rounded-full bg-[#E65100] hover:bg-[#FF6417] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
-                >
-                  {loading ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : (
-                    <>
-                      <span>Notify me</span>
-                      <Send className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
-
-            {errorMsg && <p className="text-xs text-rose-400 mt-3">{errorMsg}</p>}
-          </div>
-        </GsapReveal>
+        </div>
       </div>
     </section>
   );

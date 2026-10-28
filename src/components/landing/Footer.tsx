@@ -1,7 +1,17 @@
 "use client";
 
-import Link from "next/link";
-import { Mail, Globe, Shield, ArrowUp } from "lucide-react";
+import Image from "next/image";
+import { ArrowUp, ArrowUpRight } from "lucide-react";
+
+const LINKS = [
+  { label: "Who's in the Room", href: "#attend" },
+  { label: "Four Pillars", href: "#pillars" },
+  { label: "Programme", href: "#programme" },
+  { label: "Speakers", href: "#speakers" },
+  { label: "Tickets", href: "#tickets" },
+  { label: "Venue", href: "#venue" },
+  { label: "FAQ", href: "#faq" },
+];
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -9,121 +19,83 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#3B0207] text-white/80 border-t border-[#FF6417]/20 pt-16 pb-12">
+    <footer className="relative overflow-hidden bg-[#0A0A0A] text-white pt-20 sm:pt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
-          {/* Brand Column */}
-          <div className="md:col-span-5">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-[#FF6417] flex items-center justify-center font-black text-white text-base">
-                ACE
-              </div>
-              <span className="font-extrabold text-white text-lg tracking-wider">
-                ACE GLOBAL SUMMIT
-              </span>
+        {/* Top: lockup + contact */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
+          <div className="lg:col-span-6">
+            <div className="flex items-center">
+              <Image
+                src="/reinvent-logo-white.png"
+                alt="Reinvent Africa Network"
+                width={150}
+                height={38}
+                className="h-8 w-auto object-contain"
+              />
+              <div className="h-7 w-px bg-white/30 mx-4" />
+              <Image src="/Ace.png" alt="ACE Global Summit" width={150} height={27} className="h-6 w-auto object-contain" />
             </div>
-            <p className="text-sm text-white/70 max-w-sm font-light leading-relaxed mb-6">
-              A global summit series connecting capital, leadership, and opportunity across markets. Inaugural edition in Accra, Ghana on December 23, 2026.
+            <p className="mt-8 max-w-md text-base text-white/60 leading-relaxed">
+              A global summit series connecting capital, leadership and opportunity across markets.
             </p>
-            <div className="text-xs font-semibold text-[#FF6417]">
-              Powered by Reinvent Africa Network (RAN)
-            </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="md:col-span-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
-              Summit
-            </h4>
-            <ul className="space-y-2.5 text-sm">
-              <li>
-                <a href="#attend" className="hover:text-[#FF6417] transition-colors">
-                  Who's in the Room
-                </a>
-              </li>
-              <li>
-                <a href="#pillars" className="hover:text-[#FF6417] transition-colors">
-                  Four Pillars
-                </a>
-              </li>
-              <li>
-                <a href="#programme" className="hover:text-[#FF6417] transition-colors">
-                  Programme & Schedule
-                </a>
-              </li>
-              <li>
-                <a href="#speakers" className="hover:text-[#FF6417] transition-colors">
-                  Speakers Lineup
-                </a>
-              </li>
-              <li>
-                <a href="#tickets" className="hover:text-[#FF6417] transition-colors">
-                  Tickets & Passes
-                </a>
-              </li>
-              <li>
-                <a href="#venue" className="hover:text-[#FF6417] transition-colors">
-                  Accra Marriott Hotel
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact & Legal */}
-          <div className="md:col-span-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
-              Inquiries & Network
-            </h4>
-            <div className="space-y-3 text-sm">
-              <a
-                href="mailto:info@reinventaf.com"
-                className="flex items-center space-x-2 text-white/80 hover:text-[#FF6417] transition-colors"
-              >
-                <Mail className="w-4 h-4 text-[#FF6417]" />
-                <span>info@reinventaf.com</span>
-              </a>
-              <a
-                href="https://www.reinventaf.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-2 text-white/80 hover:text-[#FF6417] transition-colors"
-              >
-                <Globe className="w-4 h-4 text-[#FF6417]" />
-                <span>www.reinventaf.com</span>
-              </a>
-            </div>
-
-            <div className="mt-6 pt-6 border-t border-white/10 flex items-center space-x-4">
-              <Link
-                href="/admin/login"
-                className="inline-flex items-center space-x-1.5 text-xs text-white/60 hover:text-white transition-colors py-1 px-2.5 rounded bg-white/5 border border-white/10"
-              >
-                <Shield className="w-3.5 h-3.5 text-[#FF6417]" />
-                <span>Staff & Admin Portal</span>
-              </Link>
-
-              <button
-                onClick={scrollToTop}
-                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-colors ml-auto"
-                title="Scroll to top"
-              >
-                <ArrowUp className="w-4 h-4" />
-              </button>
-            </div>
+          <div className="lg:col-span-6 lg:text-right">
+            <span className="text-xs uppercase tracking-[0.25em] text-white/50">Get in touch</span>
+            <a
+              href="mailto:info@reinventaf.com"
+              className="group mt-4 flex items-center gap-4 lg:justify-end font-court text-3xl sm:text-5xl text-white hover:text-[#FF6417] transition-colors"
+              style={{ fontFamily: "'ModeCourt', sans-serif" }}
+            >
+              info@reinventaf.com
+              <span className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-[#FF6417] text-white transition-transform group-hover:rotate-45">
+                <ArrowUpRight className="h-5 w-5" />
+              </span>
+            </a>
+            <a
+              href="https://www.reinventaf.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block text-sm text-white/60 hover:text-white transition-colors"
+            >
+              www.reinventaf.com
+            </a>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 space-y-4 sm:space-y-0">
-          <div>
-            © 2026 ACE GLOBAL SUMMIT. All rights reserved. Powered by Reinvent Africa Network.
-          </div>
-          <div className="flex items-center space-x-6">
-            <span>Accra Marriott Hotel</span>
-            <span>•</span>
-            <span>December 23, 2026</span>
-          </div>
+        {/* Middle: links */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 py-10 border-b border-white/10">
+          <nav className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-white/70">
+            {LINKS.map((link) => (
+              <a key={link.href} href={link.href} className="hover:text-[#FF6417] transition-colors">
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <button
+            onClick={scrollToTop}
+            className="group inline-flex w-fit items-center gap-3 text-sm text-white/70 hover:text-white transition-colors"
+          >
+            Back to top
+            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 transition-colors group-hover:border-[#FF6417] group-hover:bg-[#FF6417]">
+              <ArrowUp className="h-4 w-4" />
+            </span>
+          </button>
         </div>
+
+        {/* Bottom bar */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-8 text-xs text-white/40">
+          <span>© 2026 ACE GLOBAL SUMMIT. Powered by Reinvent Africa Network.</span>
+        </div>
+      </div>
+
+      {/* Oversized wordmark */}
+      <div
+        aria-hidden
+        className="pointer-events-none select-none whitespace-nowrap text-center font-court leading-[0.8] text-white/[0.06] text-[17vw] -mb-[3vw]"
+        style={{ fontFamily: "'ModeCourt', sans-serif" }}
+      >
+        ACE Global
       </div>
     </footer>
   );

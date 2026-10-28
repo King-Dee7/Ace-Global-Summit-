@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { OrderRecord, TicketRecord, LeadSubscription, TicketTier } from "../types";
+import { OrderRecord, TicketRecord, LeadSubscription, ContactMessage, TicketTier } from "../types";
 import { generateTicketCode, generateQrToken } from "../utils";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -333,6 +333,22 @@ export async function saveLead(lead: LeadSubscription): Promise<boolean> {
       { email: lead.email.toLowerCase(), interest_type: lead.interestType },
       { onConflict: "email,interest_type" }
     );
+  }
+
+  return true;
+}
+
+const memoryMessages: ContactMessage[] = [];
+
+export async function saveContactMessage(msg: ContactMessage): Promise<boolean> {
+  memoryMessages.unshift(msg);
+
+  if (isSupabaseConfigured && supabase) {
+    await supabase.from("contact_messages").insert({
+      email: msg.email.toLowerCase(),
+      message: msg.message,
+      created_at: msg.createdAt,
+    });
   }
 
   return true;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, HelpCircle, Mail } from "lucide-react";
+import { Plus, ArrowUpRight, Check } from "lucide-react";
 import GsapReveal from "../motion/GsapReveal";
 
 const FAQS = [
@@ -60,85 +60,151 @@ const FAQS = [
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
   const toggle = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
   };
 
+  const sendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, message }),
+      });
+      setStatus(res.ok ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
-    <section id="faq" className="py-24 sm:py-32 bg-[#FAF7F5] text-gray-900 relative border-t border-gray-200/80">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <GsapReveal direction="down">
-            <span className="text-xs sm:text-sm font-bold tracking-widest text-[#E65100] uppercase block mb-3">
-              Clear Answers
-            </span>
-          </GsapReveal>
-          <GsapReveal direction="up" delay={0.1}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal font-court text-[#62060E] tracking-tight leading-[1.12] mb-4" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
-              Frequently Asked <span className="text-[#FF6417]">Questions</span>
-            </h2>
-          </GsapReveal>
-          <GsapReveal direction="up" delay={0.2}>
-            <p className="text-base sm:text-lg text-gray-600 font-normal">
-              Everything you need to know about attending ACE GLOBAL SUMMIT.
-            </p>
-          </GsapReveal>
+    <section id="faq" className="py-24 sm:py-32 bg-[#FAF7F5] text-gray-900 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        {/* Left: sticky heading */}
+        <div className="lg:col-span-5">
+          <div className="lg:sticky lg:top-32">
+            <GsapReveal direction="up">
+              <h2
+                className="font-court font-normal text-[#62060E] tracking-tight leading-[0.95] text-5xl sm:text-6xl lg:text-7xl"
+                style={{ fontFamily: "'ModeCourt', sans-serif" }}
+              >
+                Questions,
+                <br />
+                <span className="text-[#FF6417]">answered.</span>
+              </h2>
+            </GsapReveal>
+            <GsapReveal direction="up" delay={0.1}>
+              <p className="mt-6 max-w-sm text-base sm:text-lg text-gray-600">
+                Everything you need to know about attending ACE GLOBAL SUMMIT.
+              </p>
+            </GsapReveal>
+            <GsapReveal direction="up" delay={0.2}>
+              <form onSubmit={sendMessage} className="mt-10 rounded-3xl bg-[#62060E] p-6 sm:p-7 text-white">
+                <p className="text-sm text-white/70">Still have a question or need group booking help?</p>
+                {status === "sent" ? (
+                  <div className="mt-5 flex items-center gap-3 rounded-2xl bg-white/10 px-4 py-4 text-sm">
+                    <Check className="h-5 w-5 text-[#FF6417]" />
+                    Thanks, we&apos;ll get back to you at {email}.
+                  </div>
+                ) : (
+                  <>
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Your email"
+                      className="mt-5 w-full rounded-xl bg-white/10 border border-white/15 px-4 py-3 text-sm placeholder:text-white/50 focus:outline-none focus:border-[#FF6417]"
+                    />
+                    <textarea
+                      required
+                      rows={3}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder="Type your message..."
+                      className="mt-3 w-full resize-none rounded-xl bg-white/10 border border-white/15 px-4 py-3 text-sm placeholder:text-white/50 focus:outline-none focus:border-[#FF6417]"
+                    />
+                    <div className="mt-4 flex items-center justify-between gap-4">
+                      <span className="text-xs text-white/60">
+                        {status === "error" ? (
+                          <span className="text-[#FF7B39]">Couldn&apos;t send. Try again.</span>
+                        ) : (
+                          <>or email <a href="mailto:info@reinventaf.com" className="underline hover:text-white">info@reinventaf.com</a></>
+                        )}
+                      </span>
+                      <button
+                        type="submit"
+                        disabled={status === "sending"}
+                        className="group inline-flex items-center gap-2 rounded-full bg-[#FF6417] pl-5 pr-1.5 py-1.5 text-sm font-semibold hover:bg-[#FF7B39] transition-colors disabled:opacity-60"
+                      >
+                        {status === "sending" ? "Sending..." : "Send"}
+                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 transition-transform group-hover:rotate-45">
+                          <ArrowUpRight className="h-4 w-4" />
+                        </span>
+                      </button>
+                    </div>
+                  </>
+                )}
+              </form>
+            </GsapReveal>
+          </div>
         </div>
 
-        {/* Accordion list */}
-        <div className="space-y-4">
+        {/* Right: numbered accordion */}
+        <div className="lg:col-span-7 border-t border-[#62060E]/15">
           {FAQS.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
-              <GsapReveal key={faq.question} direction="up" delay={idx * 0.04}>
-                <div
-                  className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
-                    isOpen
-                      ? "bg-white border-[#FF6417] shadow-md"
-                      : "bg-white border-gray-200/80 hover:border-gray-300"
-                  }`}
-                >
+              <GsapReveal key={faq.question} direction="up" delay={idx * 0.03}>
+                <div className="border-b border-[#62060E]/15">
                   <button
                     onClick={() => toggle(idx)}
-                    className="w-full p-6 text-left flex items-center justify-between space-x-4 focus:outline-none"
+                    aria-expanded={isOpen}
+                    className="group w-full py-6 sm:py-7 text-left flex items-start gap-5 sm:gap-8 focus:outline-none"
                   >
-                    <span className="text-base sm:text-lg font-bold text-[#62060E] flex items-center space-x-3">
-                      <HelpCircle className="w-5 h-5 text-[#FF6417] shrink-0" />
-                      <span>{faq.question}</span>
-                    </span>
-                    <ChevronDown
-                      className={`w-5 h-5 text-[#FF6417] shrink-0 transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
+                    <span
+                      className={`pt-1 text-xs font-semibold tabular-nums tracking-widest transition-colors ${
+                        isOpen ? "text-[#FF6417]" : "text-gray-400"
                       }`}
-                    />
+                    >
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex-1 text-lg sm:text-xl font-semibold text-[#62060E] group-hover:text-[#7D0A13]">
+                      {faq.question}
+                    </span>
+                    <span
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
+                        isOpen
+                          ? "bg-[#FF6417] border-[#FF6417] text-white rotate-45"
+                          : "border-[#62060E]/25 text-[#62060E] group-hover:border-[#62060E]"
+                      }`}
+                    >
+                      <Plus className="h-4 w-4" />
+                    </span>
                   </button>
 
-                  {isOpen && (
-                    <div className="px-6 pb-6 pt-1 text-sm sm:text-base text-gray-600 leading-relaxed font-normal border-t border-gray-100">
-                      {faq.answer}
+                  <div
+                    className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                      isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="pb-7 pl-10 sm:pl-14 pr-14 text-sm sm:text-base text-gray-600 leading-relaxed">
+                        {faq.answer}
+                      </p>
                     </div>
-                  )}
+                  </div>
                 </div>
               </GsapReveal>
             );
           })}
         </div>
-
-        {/* Contact Email Callout */}
-        <GsapReveal direction="up" delay={0.3}>
-          <div className="mt-14 text-center p-6 rounded-2xl bg-white border border-gray-200 shadow-sm flex flex-col sm:flex-row items-center justify-center gap-3">
-            <span className="text-sm text-gray-600 font-medium">
-              Still have a question or need group booking assistance?
-            </span>
-            <a
-              href="mailto:info@reinventaf.com"
-              className="inline-flex items-center space-x-2 text-sm font-bold text-[#62060E] hover:text-[#FF6417]"
-            >
-              <Mail className="w-4 h-4 text-[#FF6417]" />
-              <span>info@reinventaf.com</span>
-            </a>
-          </div>
-        </GsapReveal>
       </div>
     </section>
   );

@@ -1,77 +1,86 @@
 "use client";
 
-import { Award, History, Globe2, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 import GsapReveal from "../motion/GsapReveal";
+
+const PAST_EVENT_FACTS = [
+  { value: "17 July", label: "2026" },
+  { value: "Accra", label: "Ghana" },
+  { value: "Google", label: "AI Community Center" },
+];
 
 export default function TrackRecord() {
   return (
-    <section className="py-20 sm:py-28 bg-[#4A040A] text-white border-t border-b border-[#FF6417]/15 relative">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl p-8 sm:p-12 bg-gradient-to-r from-[#62060E] to-[#3B0207] border border-[#FF6417]/25 shadow-2xl relative overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            <div className="lg:col-span-8">
-              <GsapReveal direction="up">
-                <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 text-xs font-bold text-[#FF6417] uppercase tracking-wider mb-4 border border-[#FF6417]/30">
-                  <Award className="w-4 h-4" />
-                  <span>Proven Execution Track Record</span>
-                </div>
-              </GsapReveal>
+    <section className="py-24 sm:py-32 bg-white text-gray-900 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] gap-16 lg:gap-24 items-center">
+          {/* Copy */}
+          <div>
+            <GsapReveal direction="up">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-normal font-court text-[#62060E] tracking-tight leading-[1.05]">
+                From the team behind <span className="text-[#FF6417]">From Go To Goal.</span>
+              </h2>
+            </GsapReveal>
 
-              <GsapReveal direction="up" delay={0.1}>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-normal font-court text-white leading-tight mb-4" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
-                  From the team behind the <br />
-                  <span className="text-[#FF6417]">From Go To Goal Summit.</span>
-                </h3>
-              </GsapReveal>
+            <GsapReveal direction="up" delay={0.1}>
+              <p className="mt-6 text-base sm:text-lg text-gray-600 leading-relaxed max-w-xl">
+                ACE GLOBAL SUMMIT is powered by{" "}
+                <strong className="font-semibold text-gray-900">Reinvent Africa Network (RAN)</strong>, the team
+                behind From Go To Goal Summit 2026: The Architecture of Ambition. Same team, bigger room.
+              </p>
+            </GsapReveal>
 
-              <GsapReveal direction="up" delay={0.2}>
-                <p className="text-base sm:text-lg text-white/80 leading-relaxed font-light">
-                  ACE GLOBAL SUMMIT is powered by{" "}
-                  <strong className="text-white font-semibold">Reinvent Africa Network (RAN)</strong>, the team
-                  behind the successful <em>From Go To Goal Summit</em>, held in Accra in July 2026.
-                </p>
-              </GsapReveal>
-
-              <GsapReveal direction="up" delay={0.3}>
-                <div className="mt-6 flex flex-wrap gap-4 text-xs sm:text-sm text-white/70">
-                  <div className="flex items-center space-x-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#FF6417]" />
-                    <span>Cross-Border Investor Networks</span>
+            <GsapReveal direction="up" delay={0.2}>
+              <dl className="mt-10 grid grid-cols-3 divide-x divide-gray-200 max-w-xl">
+                {PAST_EVENT_FACTS.map((fact) => (
+                  <div key={fact.value} className="px-4 sm:px-6 first:pl-0 flex flex-col-reverse">
+                    <dt className="mt-2 text-[11px] uppercase tracking-[0.18em] text-gray-500 font-semibold">
+                      {fact.label}
+                    </dt>
+                    <dd className="text-2xl sm:text-3xl font-court text-[#62060E] leading-none">{fact.value}</dd>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#FF6417]" />
-                    <span>Curated Diaspora Returnees</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#FF6417]" />
-                    <span>Institutional Alignment</span>
-                  </div>
-                </div>
-              </GsapReveal>
-            </div>
+                ))}
+              </dl>
+            </GsapReveal>
 
-            <div className="lg:col-span-4 flex flex-col space-y-4">
-              <div className="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center space-x-4">
-                <div className="p-3 rounded-xl bg-[#FF6417]/20 text-[#FF6417]">
-                  <History className="w-6 h-6" />
-                </div>
-                <div>
-                  <div className="text-xl font-bold text-white">July 2026</div>
-                  <div className="text-xs text-white/60">From Go To Goal Summit, Accra</div>
-                </div>
+            <GsapReveal direction="up" delay={0.3}>
+              <div className="mt-12 flex items-center gap-4 text-sm text-gray-500">
+                <span>Powered by</span>
+                <Image
+                  src="/reinvent-logo-white.png"
+                  alt="Reinvent Africa Network"
+                  width={140}
+                  height={40}
+                  className="h-7 w-auto invert"
+                />
               </div>
-
-              <div className="p-5 rounded-2xl bg-white/5 border border-white/10 flex items-center space-x-4">
-                <div className="p-3 rounded-xl bg-[#FF6417]/20 text-[#FF6417]">
-                  <Globe2 className="w-6 h-6" />
-                </div>
-                <div>
-                  <div className="text-xl font-bold text-white">RAN Global</div>
-                  <div className="text-xs text-white/60">Reinvent Africa Network</div>
-                </div>
-              </div>
-            </div>
+            </GsapReveal>
           </div>
+
+          {/* Poster */}
+          <GsapReveal direction="up" delay={0.15}>
+            <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
+              {/* Offset brand card for depth */}
+              <div aria-hidden className="absolute inset-0 rounded-3xl bg-[#62060E] -rotate-6 translate-x-3 translate-y-3" />
+
+              <div className="group relative rounded-3xl overflow-hidden shadow-2xl rotate-2 transition-transform duration-500 hover:rotate-0">
+                <Image
+                  src="/from-go-to-goal-poster.jpg"
+                  alt="From Go To Goal Summit 2026 poster"
+                  width={1024}
+                  height={1280}
+                  sizes="(min-width: 1024px) 40vw, 90vw"
+                  className="w-full h-auto"
+                />
+              </div>
+
+              {/* Past-edition badge */}
+              <div className="absolute -top-5 -left-5 sm:-top-6 sm:-left-6 w-24 h-24 rounded-full bg-[#FF6417] text-white flex flex-col items-center justify-center text-center shadow-xl -rotate-12">
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em]">Past</span>
+                <span className="text-lg font-court leading-none">Edition</span>
+              </div>
+            </div>
+          </GsapReveal>
         </div>
       </div>
     </section>

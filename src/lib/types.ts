@@ -69,3 +69,9 @@ export interface LeadSubscription {
   email: string;
   interestType: "schedule" | "speakers" | "partnership" | "general";
 }
+
+export interface ContactMessage {
+  email: string;
+  message: string;
+  createdAt: string;
+}

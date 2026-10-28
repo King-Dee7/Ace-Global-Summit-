@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Shield, Users, CreditCard } from "lucide-react";
+import { Check, Users } from "lucide-react";
 import { SUMMIT_TICKETS } from "@/lib/data/tickets";
 import { TicketProduct } from "@/lib/types";
 import GsapReveal from "../motion/GsapReveal";
@@ -19,11 +19,6 @@ export default function TicketsSection({ onSelectTicket }: TicketsSectionProps) 
     <section id="tickets" className="py-24 sm:py-32 bg-[#FAF7F5] text-gray-900 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <GsapReveal direction="down">
-            <span className="text-xs sm:text-sm font-bold tracking-widest text-[#E65100] uppercase block mb-3">
-              Passes & Registration
-            </span>
-          </GsapReveal>
           <GsapReveal direction="up" delay={0.1}>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal font-court text-[#62060E] tracking-tight leading-[1.12] mb-4" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
               Choose your <span className="text-[#FF6417]">experience.</span>
@@ -198,22 +193,6 @@ export default function TicketsSection({ onSelectTicket }: TicketsSectionProps) 
           })}
         </div>
 
-        {/* Trust & Paystack banner under cards */}
-        <GsapReveal direction="up" delay={0.4}>
-          <div className="mt-12 text-center text-xs sm:text-sm text-gray-600 flex flex-wrap items-center justify-center gap-3 sm:gap-6">
-            <div className="flex items-center space-x-2">
-              <Shield className="w-4 h-4 text-[#FF6417]" />
-              <span className="font-medium">Secure payment by Paystack</span>
-            </div>
-            <span className="hidden sm:inline text-gray-300">•</span>
-            <div className="flex items-center space-x-2">
-              <CreditCard className="w-4 h-4 text-[#FF6417]" />
-              <span>Cards, Mobile Money & Bank Transfers accepted</span>
-            </div>
-            <span className="hidden sm:inline text-gray-300">•</span>
-            <span>Your instant confirmation and digital ticket is sent to your email.</span>
-          </div>
-        </GsapReveal>
       </div>
     </section>
   );

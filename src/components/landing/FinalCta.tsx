@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar, MapPin } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import GsapReveal from "../motion/GsapReveal";
 
 interface FinalCtaProps {
@@ -9,44 +9,36 @@ interface FinalCtaProps {
 
 export default function FinalCta({ onSecureSeatClick }: FinalCtaProps) {
   return (
-    <section className="py-24 sm:py-32 bg-gradient-to-b from-[#62060E] to-[#3B0207] text-white relative overflow-hidden text-center">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <GsapReveal direction="down">
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/10 border border-[#FF6417]/40 text-xs sm:text-sm font-bold text-white uppercase tracking-wider mb-8">
-            <span>December 23, 2026 • Accra, Ghana</span>
-          </div>
-        </GsapReveal>
+    <section className="relative isolate overflow-hidden bg-[#250104] text-white">
+      {/* Full-bleed crowd photo */}
+      <div
+        className="absolute inset-0 -z-10 bg-cover bg-center"
+        style={{ backgroundImage: "url('/GOTOGOAL%2816%29.jpg')" }}
+      />
+      <div className="absolute inset-0 -z-10 bg-[#250104]/60" />
 
-        <GsapReveal direction="up" delay={0.1}>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal font-court text-white tracking-tight leading-[1.12] mb-6" style={{ fontFamily: "'ModeCourt', sans-serif" }}>
-            One day in Accra. <br />
-            <span className="text-gradient-orange">
-              Come meet the people building what's next.
-            </span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[80svh] flex flex-col justify-center py-24 [text-shadow:0_2px_16px_rgba(0,0,0,0.35)]">
+        <GsapReveal direction="up">
+          <h2
+            className="font-court font-normal leading-[0.95] tracking-tight text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] max-w-5xl"
+            style={{ fontFamily: "'ModeCourt', sans-serif" }}
+          >
+            Come meet the people building <span className="text-[#FF6417]">what&apos;s next.</span>
           </h2>
         </GsapReveal>
 
-        <GsapReveal direction="up" delay={0.2}>
-          <div className="flex flex-wrap items-center justify-center gap-4 text-base sm:text-lg text-white/90 mb-10 font-medium">
-            <div className="flex items-center space-x-2">
-              <Calendar className="w-5 h-5 text-[#FF6417]" />
-              <span>December 23, 2026</span>
-            </div>
-            <span className="text-[#FF6417]">•</span>
-            <div className="flex items-center space-x-2">
-              <MapPin className="w-5 h-5 text-[#FF6417]" />
-              <span>Accra Marriott Hotel</span>
-            </div>
+        <GsapReveal direction="up" delay={0.15}>
+          <div className="mt-12 flex flex-col sm:flex-row sm:items-center gap-6 border-t border-white/25 pt-8">
+            <button
+              onClick={onSecureSeatClick}
+              className="group inline-flex w-fit items-center gap-4 rounded-full bg-[#FF6417] pl-8 pr-2 py-2 text-base sm:text-lg font-semibold [text-shadow:none] transition-colors hover:bg-[#FF7B39]"
+            >
+              Secure my seat
+              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#62060E] transition-transform group-hover:rotate-45">
+                <ArrowUpRight className="h-5 w-5" />
+              </span>
+            </button>
           </div>
-        </GsapReveal>
-
-        <GsapReveal direction="up" delay={0.3}>
-          <button
-            onClick={onSecureSeatClick}
-            className="px-10 py-5 rounded-full bg-gradient-to-r from-[#FF6417] via-[#E65100] to-[#FF6417] text-white font-black text-lg sm:text-xl shadow-md hover:scale-105 active:scale-95 transition-all duration-300 border border-white/20 inline-flex items-center justify-center"
-          >
-            <span>Secure my seat</span>
-          </button>
         </GsapReveal>
       </div>
     </section>
